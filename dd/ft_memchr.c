@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/21 13:47:21 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/05/21 13:47:53 by nmeunier         ###   ########.fr       */
+/*   Created: 2025/11/11 15:08:55 by nmeunier          #+#    #+#             */
+/*   Updated: 2026/05/22 13:44:50 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/libft.h"
 
-int	main(int ac, char **av, char **env)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	
+	size_t	i;
+	char	*s2;
+
+	i = 0;
+	s2 = (char *)s;
+	while (i < n)
+	{
+		if (s2[i] == (char)c)
+			return ((void *)&s2[i]);
+		i++;
+	}
+	return (0);
 }
