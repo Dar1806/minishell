@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:47:21 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/05/27 16:13:08 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/05/27 17:04:35 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(int ac, char **av)
 {
 	char	*line;
 	t_token	*tokens;
+	/* t_cmd	*cmd; */
 
 	(void)av;
 	if (ac != 1)
@@ -26,12 +27,7 @@ int	main(int ac, char **av)
 		if (!line)
 			break ;
 		tokens = lexer(line);
-		t_token *temp = tokens;
-		while (temp)
-		{
-			printf("value = %s type = %d\n", temp->value, temp->type);
-    		temp = temp->next;
-		}
+		/* cmd = parser(tokens); */
 		free_tokens(tokens);
 		free(line);
 	}

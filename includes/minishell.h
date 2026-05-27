@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:38:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/05/27 16:02:15 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/05/27 16:55:27 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <sys/types.h>
 # include <readline/readline.h>
+# include <readline/history.h>
 # include <sys/wait.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -34,6 +35,8 @@ typedef enum e_token_type
 	TOKEN_DOUBLE_QUOTES,	/*type = 7 // value = "abc"*/
 }	t_token_type;
 
+
+/*STRUCT LEXER*/
 typedef struct s_token
 {
 	char					*value;
@@ -41,8 +44,20 @@ typedef struct s_token
 	t_token_type			type;
 }	t_token;
 
-void	chose_tokens(t_token **tokens, char *line, int *i);
+/*STRUCT PARSER*/
+typedef struct s_cmd
+{
+	char			*here_doc;
+	char			*outfile;
+	char			*infile;
+	char			**args;
+	int				append;
+	struct s_cmd	*next;
+}	t_cmd;
+
+int		chose_tokens(t_token **tokens, char *line, int *i);
 void	free_tokens(t_token *tokens);
+t_cmd	*parser(t_token **tokens);
 t_token	*lexer(char *line);
 
 #endif

@@ -6,9 +6,13 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 14:10:41 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/05/27 14:10:43 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/05/27 16:56:09 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+t_cmd	*parser(t_token **tokens)
+{
+	
+}

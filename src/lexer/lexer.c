@@ -21,7 +21,11 @@ t_token	*lexer(char *line)
 	i = 0;
 	while (line[i])
 	{
-		chose_tokens(&tokens, line, &i);
+		if (chose_tokens(&tokens, line, &i) == -1)
+		{
+			free_tokens(tokens);
+			return (NULL);
+		}
 	}
 	return (tokens);
 }

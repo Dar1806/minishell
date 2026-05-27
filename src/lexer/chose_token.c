@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 14:52:09 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/05/27 16:09:21 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/05/27 17:12:41 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,29 +34,31 @@ static void	add_token(t_token **tokens, t_token_type type, char *value)
 	}
 }
 
-static void	chose_quote(t_token **tokens, char *line, int *i)
+static int	chose_quote(t_token **tokens, char *line, int *i)
 {
-	int		j;
-	char	*str;
+	int				j;
+	char			*str;
+	char			quote;
+	t_token_type	type;
 
-	j = *(i);
-	if (line[j] == '\'')
-	{
-		j++;
-		while (line[j] && line[j] != '\'' && line[j] != '\0')
-			j++;
-		str = ft_substr(line, (*i) + 1, j - *i - 1);
-		add_token(tokens, TOKEN_SINGLE_QUOTES, str);
-	}
+	j = *i;
+	quote = line[j];
+	if (quote == '\'')
+		type = TOKEN_SINGLE_QUOTES;
 	else
-	{
+		type = TOKEN_DOUBLE_QUOTES;
+	j++;
+	while (line[j] && line[j] != quote)
 		j++;
-		while (line[j] && line[j] != '"' && line[j] != '\0')
-			j++;
-		str = ft_substr(line, (*i) + 1, j - *i - 1);
-		add_token(tokens, TOKEN_DOUBLE_QUOTES, str);
+	if (!line[j])
+	{
+		ft_putstr_fd("minishell: unexpected EOF while looking for matching quote\n", 2);
+		return (-1);
 	}
-	(*i) = j;
+	str = ft_substr(line, (*i) + 1, j - *i - 1);
+	add_token(tokens, type, str);
+	*i = j;
+	return (0);
 }
 
 static void	chose_redir(t_token **tokens, char *line, int *i)
@@ -93,18 +95,23 @@ static void	read_word(t_token **tokens, char *line, int *i)
 	char	*str;
 
 	j = (*i);
-	while (line[j] != ' ' && line[j] != '|'
+	while (line[j] != ' ' && line[j] != '\t' && line[j] != '|'
 		&& line[j] != '<' && line[j] != '>' && line[j] != '\0'
 		&& line[j] != '\'' && line[j] != '"')
 		j++;
+	if (j == *i)
+	{
+		(*i)++;
+		return ;
+	}
 	str = ft_substr(line, (*i), j - *i);
 	add_token(tokens, TOKEN_WORD, str);
 	(*i) = j;
 }
 
-void	chose_tokens(t_token **tokens, char *line, int *i)
+int	chose_tokens(t_token **tokens, char *line, int *i)
 {
-	if (line[*i] == ' ')
+	if (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
 	else if (line[*i] == '|')
 	{
@@ -118,10 +125,12 @@ void	chose_tokens(t_token **tokens, char *line, int *i)
 	}
 	else if (line[*i] == '\'' || line[*i] == '"')
 	{
-		chose_quote(tokens, line, i);
+		if (chose_quote(tokens, line, i) == -1)
+			return (-1);
 		if (line[*i])
 			(*i)++;
 	}
 	else
 		read_word(tokens, line, i);
+	return (0);
 }
