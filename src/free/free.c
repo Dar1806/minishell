@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/22 12:24:07 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/05/27 14:53:35 by nmeunier         ###   ########.fr       */
+/*   Created: 2026/05/27 16:01:55 by nmeunier          #+#    #+#             */
+/*   Updated: 2026/05/27 16:05:21 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_token	*lexer(char *line)
-{
-	t_token	*tokens;
-	int		i;
 
-	tokens = NULL;
-	i = 0;
-	while (line[i])
+void	free_tokens(t_token *tokens)
+{
+	t_token	*next;
+
+	while (tokens)
 	{
-		chose_tokens(&tokens, line, &i);
+		next = tokens->next;
+		free(tokens->value);
+		free(tokens);
+		tokens = next;
 	}
-	return (tokens);
 }

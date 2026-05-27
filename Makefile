@@ -6,7 +6,7 @@
 #    By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 11:19:10 by nmeunier          #+#    #+#              #
-#    Updated: 2026/05/22 13:47:50 by nmeunier         ###   ########.fr        #
+#    Updated: 2026/05/27 16:02:25 by nmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ LIBFT = libft/ft_lstadd_back.c libft/ft_lstadd_front.c libft/ft_lstdelone.c \
 		libft/ft_lstnew.c libft/ft_lstsize.c libft/ft_lstlast.c \
 		libft/ft_strdup.c libft/ft_strchr.c libft/ft_split.c \
 
-SRCS = $(LIBFT) src/main.c src/lexer/lexer.c
+SRCS = $(LIBFT) src/main.c src/lexer/lexer.c src/lexer/chose_token.c \
+				src/free/free.c
 
 CC = cc
 RM = rm -f
