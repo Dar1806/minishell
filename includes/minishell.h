@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:38:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/05/27 16:55:27 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/05/28 17:39:15 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef enum e_token_type
 	TOKEN_DOUBLE_QUOTES,	/*type = 7 // value = "abc"*/
 }	t_token_type;
 
-
 /*STRUCT LEXER*/
 typedef struct s_token
 {
@@ -56,8 +55,11 @@ typedef struct s_cmd
 }	t_cmd;
 
 int		chose_tokens(t_token **tokens, char *line, int *i);
+t_token	*fill_cmd(t_cmd *cmd, t_token *cursor);
 void	free_tokens(t_token *tokens);
-t_cmd	*parser(t_token **tokens);
+t_cmd	*parser(t_token *tokens);
+void	free_cmd(t_cmd *cmd);
 t_token	*lexer(char *line);
+t_cmd	*new_cmd(void);
 
 #endif

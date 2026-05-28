@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 14:52:09 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/05/27 17:12:41 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/05/28 17:18:47 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	chose_quote(t_token **tokens, char *line, int *i)
 		j++;
 	if (!line[j])
 	{
-		ft_putstr_fd("minishell: unexpected EOF while looking for matching quote\n", 2);
+		ft_putstr_fd("minishell: EOF while looking for matching quote\n", 2);
 		return (-1);
 	}
 	str = ft_substr(line, (*i) + 1, j - *i - 1);
