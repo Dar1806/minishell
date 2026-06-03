@@ -1,46 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/27 16:01:55 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/06/03 16:59:04 by nmeunier         ###   ########.fr       */
+/*   Created: 2026/06/03 15:25:57 by nmeunier          #+#    #+#             */
+/*   Updated: 2026/06/03 15:59:05 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	free_tokens(t_token *tokens)
+int	exec_here_doc(char *limiter)
 {
-	t_token	*next;
+	int		fd[2];
+	char	*line;
 
-	while (tokens)
+	if (pipe(fd) == -1)
 	{
-		next = tokens->next;
-		free(tokens->value);
-		free(tokens);
-		tokens = next;
+		ft_putstr_fd("Error : pipe failed\n", 2);
+		exit(1);
 	}
-}
-
-void	free_cmd(t_cmd *cmd)
-{
-	int		i;
-	t_cmd	*next;
-
-	while (cmd)
+	ft_putstr_fd("> ", 1);
+	line = readline("");
+	while (line && ft_strncmp(line, limiter, ft_strlen(limiter) + 1) != 0)
 	{
-		next = cmd->next;
-		i = 0;
-		while (cmd->args && cmd->args[i])
-			free(cmd->args[i++]);
-		free(cmd->args);
-		free(cmd->here_doc);
-		free(cmd->infile);
-		free(cmd->outfile);
-		free(cmd);
-		cmd = next;
+		write(fd[1], line, ft_strlen(line));
+		write(fd[1], "\n", 1);
+		free(line);
+		ft_putstr_fd("> ", 1);
+		line = readline("");
 	}
+	free(line);
+	close(fd[1]);
+	return (fd[0]);
 }
