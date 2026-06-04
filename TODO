@@ -1,0 +1,47 @@
+
+------------------- TODO -------------------
+
+- Garbage collector
+- Ajouter expander
+- Gerer $VAR et ~ (= $HOME)
+- Gerer env -i ./minishell (Environnement minimum...)
+- Variable global pour les signaux
+- Mettre l'env dans une liste chaine (Prevoir une fonction qui convertie cette liste chainee en char **env pour execve)
+
+SIGNAUX :
+- Ctrl + C dans un heredoc est differente de celui de base
+
+------------------- Erreur -------------------
+
+Minishell :
+	minishell$ echo ""test""
+	 test 
+
+Expected :
+	bash-5.2$ echo ""test""
+	 test
+
+Minishell :
+	minishell$ <<
+	minishell : syntax error
+	minishell$ <<
+	minishell : syntax error
+	[1]    41991 segmentation fault (core dumped)  ./minishell
+
+------------------- Valgrind -------------------
+
+➜ github valgrind ./minishell
+==43304== Memcheck, a memory error detector
+==43304== Copyright (C) 2002-2024, and GNU GPL'd, by Julian Seward et al.
+==43304== Using Valgrind-3.26.0 and LibVEX; rerun with -h for copyright info
+==43304== Command: ./minishell
+==43304== 
+minishell$ <<
+minishell : syntax error
+==43304== Conditional jump or move depends on uninitialised value(s)
+==43304==    at 0x4028D5: execution (setup_exec.c:65)
+==43304==    by 0x401D49: main (main.c:36)
+==43304== 
+==43304== Conditional jump or move depends on uninitialised value(s)
+==43304==    at 0x402BCE: free_cmd (free.c:37)
+==43304==    by 0x401D61: main (main.c:38)

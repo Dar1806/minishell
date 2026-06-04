@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:38:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/06/03 17:12:22 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/06/04 14:09:47 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_cmd
 }	t_cmd;
 
 void	run_child(t_cmd *cmd, char **env, int *pipes, int i, int n_cmds);
-int		chose_tokens(t_token **tokens, char *line, int *i);
+int		choose_tokens(t_token **tokens, char *line, int *i);
 void	clean_all(pid_t *pids, int *pipes, int n_cmds);
 t_token	*fill_cmd(t_cmd *cmd, t_token *cursor);
 char	*get_path(char *cmd_name, char **env);

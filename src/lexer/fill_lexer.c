@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chose_token.c                                      :+:      :+:    :+:   */
+/*   fill_lexer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 14:52:09 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/05/28 17:18:47 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/06/04 14:09:47 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	add_token(t_token **tokens, t_token_type type, char *value)
 	}
 }
 
-static int	chose_quote(t_token **tokens, char *line, int *i)
+static int	choose_quote(t_token **tokens, char *line, int *i)
 {
 	int				j;
 	char			*str;
@@ -61,7 +61,7 @@ static int	chose_quote(t_token **tokens, char *line, int *i)
 	return (0);
 }
 
-static void	chose_redir(t_token **tokens, char *line, int *i)
+static void	choose_redir(t_token **tokens, char *line, int *i)
 {
 	int	j;
 
@@ -109,7 +109,7 @@ static void	read_word(t_token **tokens, char *line, int *i)
 	(*i) = j;
 }
 
-int	chose_tokens(t_token **tokens, char *line, int *i)
+int	choose_tokens(t_token **tokens, char *line, int *i)
 {
 	if (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
@@ -120,12 +120,12 @@ int	chose_tokens(t_token **tokens, char *line, int *i)
 	}
 	else if (line[*i] == '>' || line[*i] == '<')
 	{
-		chose_redir(tokens, line, i);
+		choose_redir(tokens, line, i);
 		(*i)++;
 	}
 	else if (line[*i] == '\'' || line[*i] == '"')
 	{
-		if (chose_quote(tokens, line, i) == -1)
+		if (choose_quote(tokens, line, i) == -1)
 			return (-1);
 		if (line[*i])
 			(*i)++;

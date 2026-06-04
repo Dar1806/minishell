@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 12:24:07 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/05/27 14:53:35 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/06/04 14:09:47 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_token	*lexer(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (chose_tokens(&tokens, line, &i) == -1)
+		if (choose_tokens(&tokens, line, &i) == -1)
 		{
 			free_tokens(tokens);
 			return (NULL);
