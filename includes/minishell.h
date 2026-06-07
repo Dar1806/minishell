@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:38:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/06/04 14:09:47 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/06/05 19:20:20 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include <fcntl.h>
 # include "libft.h"
 
-extern int g_exit_status; /*valeur exit_status*/
 
 typedef enum e_token_type
 {
@@ -40,6 +39,7 @@ typedef enum e_token_type
 /*STRUCT LEXER*/
 typedef struct s_token
 {
+	int						joined;
 	char					*value;
 	struct s_token			*next;
 	t_token_type			type;
@@ -56,19 +56,30 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 }	t_cmd;
 
-void	run_child(t_cmd *cmd, char **env, int *pipes, int i, int n_cmds);
+/*STRUCT SHELL*/
+typedef struct s_shell
+{
+	char			**env;
+	int				exit_status;
+}	t_shell;
+
+void	run_child(t_cmd *cmd, t_shell *shell, int *pipes, int n_cmds);
+void	add_token(t_token **tokens, t_token_type type, char *value);
+void	set_last_joined(t_token *tokens, char *line, int i);
 int		choose_tokens(t_token **tokens, char *line, int *i);
-void	clean_all(pid_t *pids, int *pipes, int n_cmds);
+int		clean_all(pid_t *pids, int *pipes, int n_cmds);
 t_token	*fill_cmd(t_cmd *cmd, t_token *cursor);
 char	*get_path(char *cmd_name, char **env);
-void	execution(t_cmd *cmd, char **env);
+void	execution(t_cmd *cmd, t_shell *shell);
 void	close_all(int *pipes, int n_cmds);
 void	exec_cmd(t_cmd *cmd, char **env);
+int		is_redir_type(t_token_type type);
+int		is_word_type(t_token_type type);
 int		exec_here_doc(char *limiter);
 void	free_tokens(t_token *tokens);
 t_cmd	*parser(t_token *tokens);
 int		*open_pipes(int n_cmds);
-int 	count_cmds(t_cmd *cmd);
+int		count_cmds(t_cmd *cmd);
 void	free_cmd(t_cmd *cmd);
 t_token	*lexer(char *line);
 t_cmd	*new_cmd(void);

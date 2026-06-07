@@ -6,33 +6,11 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 14:52:09 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/06/04 14:09:47 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/06/05 15:35:02 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-static void	add_token(t_token **tokens, t_token_type type, char *value)
-{
-	t_token	*new;
-	t_token	*last;
-
-	new = malloc(sizeof(t_token));
-	if (!new)
-		return ;
-	new->type = type;
-	new->value = value;
-	new->next = NULL;
-	if (!*tokens)
-		*tokens = new;
-	else
-	{
-		last = *tokens;
-		while (last->next)
-			last = last->next;
-		last->next = new;
-	}
-}
 
 static int	choose_quote(t_token **tokens, char *line, int *i)
 {
@@ -109,6 +87,16 @@ static void	read_word(t_token **tokens, char *line, int *i)
 	(*i) = j;
 }
 
+static int	handle_quote_token(t_token **tokens, char *line, int *i)
+{
+	if (choose_quote(tokens, line, i) == -1)
+		return (-1);
+	if (line[*i])
+		(*i)++;
+	set_last_joined(*tokens, line, *i);
+	return (0);
+}
+
 int	choose_tokens(t_token **tokens, char *line, int *i)
 {
 	if (line[*i] == ' ' || line[*i] == '\t')
@@ -124,13 +112,11 @@ int	choose_tokens(t_token **tokens, char *line, int *i)
 		(*i)++;
 	}
 	else if (line[*i] == '\'' || line[*i] == '"')
-	{
-		if (choose_quote(tokens, line, i) == -1)
-			return (-1);
-		if (line[*i])
-			(*i)++;
-	}
+		return (handle_quote_token(tokens, line, i));
 	else
+	{
 		read_word(tokens, line, i);
+		set_last_joined(*tokens, line, *i);
+	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 15:17:03 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/06/03 17:17:15 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/06/05 16:03:43 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,10 @@ static int	set_stdout(t_cmd *cmd)
 	return (0);
 }
 
-void	run_child(t_cmd *cmd, char **env, int *pipes, int i, int n_cmds)
+void	run_child(t_cmd *cmd, t_shell *shell, int *pipes, int n_cmds)
 {
-	if (pipes)
-	{
-		if (i > 0)
-			dup2(pipes[(i - 1) * 2], STDIN_FILENO);
-		if (i < n_cmds - 1)
-			dup2(pipes[i * 2 + 1], STDOUT_FILENO);
-	}
 	close_all(pipes, n_cmds);
 	if (set_stdin(cmd) || set_stdout(cmd))
 		exit(1);
-	exec_cmd(cmd, env);
+	exec_cmd(cmd, shell->env);
 }

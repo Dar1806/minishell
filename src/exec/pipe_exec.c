@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 16:33:25 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/06/03 17:12:15 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/06/05 15:36:43 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	close_all(int *pipes, int n_cmds)
 		close(pipes[i++]);
 }
 
-static void	wait_all(pid_t *pids, int n_cmds)
+static int	wait_all(pid_t *pids, int n_cmds)
 {
 	int	i;
 	int	status;
@@ -59,16 +59,19 @@ static void	wait_all(pid_t *pids, int n_cmds)
 	while (i < n_cmds)
 		waitpid(pids[i++], &status, 0);
 	if (WIFEXITED(status))
-		g_exit_status = WEXITSTATUS(status);
+		return (WEXITSTATUS(status));
 	else if (WIFSIGNALED(status))
-		g_exit_status = (128 + WTERMSIG(status));
+		return (128 + WTERMSIG(status));
+	return (0);
 }
 
-void	clean_all(pid_t *pids, int *pipes, int n_cmds)
+int	clean_all(pid_t *pids, int *pipes, int n_cmds)
 {
+	int	exit_status;
+
 	close_all(pipes, n_cmds);
-	wait_all(pids, n_cmds);
+	exit_status = wait_all(pids, n_cmds);
 	free(pipes);
 	free(pids);
-
+	return (exit_status);
 }

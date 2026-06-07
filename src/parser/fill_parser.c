@@ -6,45 +6,47 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 17:37:35 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/05/28 18:37:33 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/06/07 19:43:32 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_cmd	*new_cmd(void)
+static void	append_to_arg(t_cmd *cmd, int i, char *value)
 {
-	t_cmd	*cmd;
+	char	*tmp;
 
-	cmd = malloc(sizeof(t_cmd));
-	cmd->append = 0;
-	cmd->args = NULL;
-	cmd->here_doc = NULL;
-	cmd->infile = NULL;
-	cmd->outfile = NULL;
-	cmd->next = NULL;
-	return (cmd);
+	if (!cmd->args[i])
+		cmd->args[i] = ft_strdup(value);
+	else
+	{
+		tmp = ft_strjoin(cmd->args[i], value);
+		free(cmd->args[i]);
+		cmd->args[i] = tmp;
+	}
 }
 
 static int	count_args(t_token *cursor)
 {
 	int	count;
+	int	is_join;
 
 	count = 0;
+	is_join = 0;
 	while (cursor && cursor->type != TOKEN_PIPE)
 	{
-		if (cursor->type == TOKEN_REDIR_IN
-			|| cursor->type == TOKEN_REDIR_OUT
-			|| cursor->type == TOKEN_REDIR_APPEND
-			|| cursor->type == TOKEN_HEREDOC)
+		if (is_redir_type(cursor->type))
 		{
+			is_join = 0;
 			if (cursor->next)
 				cursor = cursor->next;
 		}
-		else if (cursor->type == TOKEN_WORD
-			|| cursor->type == TOKEN_SINGLE_QUOTES
-			|| cursor->type == TOKEN_DOUBLE_QUOTES)
-			count++;
+		else if (is_word_type(cursor->type))
+		{
+			if (!is_join)
+				count++;
+			is_join = cursor->joined;
+		}
 		cursor = cursor->next;
 	}
 	return (count);
@@ -94,17 +96,19 @@ t_token	*fill_cmd(t_cmd *cmd, t_token *cursor)
 	int	i;
 
 	i = 0;
-	cmd->args = malloc(sizeof(char *) * (count_args(cursor) + 1));
+	cmd->args = ft_calloc(count_args(cursor) + 1, sizeof(char *));
 	if (!cmd->args)
 		return (NULL);
 	while (cursor && cursor->type != TOKEN_PIPE)
 	{
-		if (cursor->type == TOKEN_SINGLE_QUOTES
-			|| cursor->type == TOKEN_DOUBLE_QUOTES
-			|| cursor->type == TOKEN_WORD)
-			cmd->args[i++] = ft_strdup(cursor->value);
+		if (is_word_type(cursor->type))
+		{
+			append_to_arg(cmd, i, cursor->value);
+			if (!cursor->joined)
+				i++;
+		}
 		else if (handle_redir(cmd, &cursor) == -1)
-			return (NULL);
+			return (cmd->args[i] = NULL, NULL);
 		if (cursor)
 			cursor = cursor->next;
 	}
