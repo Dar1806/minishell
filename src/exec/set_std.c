@@ -6,13 +6,13 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 15:17:03 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/06/05 16:03:43 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/06/07 21:05:10 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	write_read(char *file, int mode)
+int	write_read(char *file, int mode)
 {
 	int	fd;
 
@@ -77,8 +77,15 @@ static int	set_stdout(t_cmd *cmd)
 
 void	run_child(t_cmd *cmd, t_shell *shell, int *pipes, int n_cmds)
 {
+	int	in_err;
+	int	out_err;
+
 	close_all(pipes, n_cmds);
-	if (set_stdin(cmd) || set_stdout(cmd))
+	in_err = set_stdin(cmd);
+	out_err = set_stdout(cmd);
+	if (in_err || out_err)
 		exit(1);
+	if (!cmd->args || !cmd->args[0])
+		exit(0);
 	exec_cmd(cmd, shell->env);
 }

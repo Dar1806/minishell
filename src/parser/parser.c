@@ -6,23 +6,11 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 14:10:41 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/06/05 15:36:15 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/06/07 20:41:04 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-int	is_redir_type(t_token_type type)
-{
-	return (type == TOKEN_REDIR_IN || type == TOKEN_REDIR_OUT
-		|| type == TOKEN_REDIR_APPEND || type == TOKEN_HEREDOC);
-}
-
-int	is_word_type(t_token_type type)
-{
-	return (type == TOKEN_WORD || type == TOKEN_SINGLE_QUOTES
-		|| type == TOKEN_DOUBLE_QUOTES);
-}
 
 t_cmd	*new_cmd(void)
 {
@@ -47,12 +35,20 @@ static void	add_cmd(t_cmd **first, t_cmd **last, t_cmd *cmd)
 	*last = cmd;
 }
 
-t_cmd	*parser(t_token *tokens)
+static int	syntax_error(t_shell *shell)
+{
+	ft_putstr_fd("minishell : syntax error\n", 2);
+	shell->exit_status = 2;
+	return (2);
+}
+
+t_cmd	*parser(t_token *tokens, t_shell *shell)
 {
 	t_cmd	*cmd;
 	t_cmd	*first;
 	t_cmd	*last;
 	t_token	*cursor;
+	int		parse_error;
 
 	if (!tokens)
 		return (NULL);
@@ -61,13 +57,15 @@ t_cmd	*parser(t_token *tokens)
 	cursor = tokens;
 	while (cursor)
 	{
+		if (cursor->type == TOKEN_PIPE)
+			return (syntax_error(shell), free_cmd(first), NULL);
 		cmd = new_cmd();
 		if (!cmd)
-		{
-			free_cmd(first);
-			return (NULL);
-		}
-		cursor = fill_cmd(cmd, cursor);
+			return (free_cmd(first), NULL);
+		cursor = fill_cmd(cmd, cursor, &parse_error);
+		if (parse_error)
+			return (shell->exit_status = 2,
+				free_cmd(cmd), free_cmd(first), NULL);
 		add_cmd(&first, &last, cmd);
 	}
 	return (first);

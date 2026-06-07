@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 17:37:35 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/06/07 19:43:32 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/06/07 21:29:46 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,23 +66,27 @@ static	int	nothing_after(t_token **token)
 	return (-1);
 }
 
-static	int	handle_redir(t_cmd *cmd, t_token **token)
+static	int	handle_redir(t_cmd *cmd, t_token **token, int *parse_error)
 {
 	t_token_type	type;
+	int				fd;
 
 	if (nothing_after(token) == -1)
-		return (ft_putstr_fd("minishell : syntax error\n", 2), -1);
+		return (ft_putstr_fd("minishell : syntax error\n", 2),
+			*parse_error = 1, -1);
 	type = (*token)->type;
 	(*token) = (*token)->next;
-	if (type == TOKEN_REDIR_OUT)
+	if (type == TOKEN_REDIR_OUT || type == TOKEN_REDIR_APPEND)
 	{
+		if (cmd->outfile)
+		{
+			fd = write_read(cmd->outfile, cmd->append + 1);
+			if (fd != -1)
+				close(fd);
+			free(cmd->outfile);
+		}
 		cmd->outfile = ft_strdup((*token)->value);
-		cmd->append = 0;
-	}
-	else if (type == TOKEN_REDIR_APPEND)
-	{
-		cmd->outfile = ft_strdup((*token)->value);
-		cmd->append = 1;
+		cmd->append = (type == TOKEN_REDIR_APPEND);
 	}
 	else if (type == TOKEN_REDIR_IN)
 		cmd->infile = ft_strdup((*token)->value);
@@ -91,7 +95,7 @@ static	int	handle_redir(t_cmd *cmd, t_token **token)
 	return (0);
 }
 
-t_token	*fill_cmd(t_cmd *cmd, t_token *cursor)
+t_token	*fill_cmd(t_cmd *cmd, t_token *cursor, int *parse_error)
 {
 	int	i;
 
@@ -107,7 +111,7 @@ t_token	*fill_cmd(t_cmd *cmd, t_token *cursor)
 			if (!cursor->joined)
 				i++;
 		}
-		else if (handle_redir(cmd, &cursor) == -1)
+		else if (handle_redir(cmd, &cursor, parse_error) == -1)
 			return (cmd->args[i] = NULL, NULL);
 		if (cursor)
 			cursor = cursor->next;

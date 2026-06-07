@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:47:21 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/06/05 19:20:56 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/06/07 20:27:23 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int ac, char **av, char **env)
 		if (!line)
 			break ;
 		tokens = lexer(line);
-		cmd = parser(tokens);
+		cmd = parser(tokens, &shell);
 		execution(cmd, &shell);
 		free_tokens(tokens);
 		free_cmd(cmd);

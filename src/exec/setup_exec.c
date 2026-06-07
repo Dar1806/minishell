@@ -70,8 +70,14 @@ void	pipe_exec(t_cmd *cmd, t_shell *shell)
 
 void	execution(t_cmd *cmd, t_shell *shell)
 {
-	if (!cmd || !cmd->args || !cmd->args[0])
+	if (!cmd)
 		return ;
+	if (!cmd->args || !cmd->args[0])
+	{
+		if (cmd->infile || cmd->outfile)
+			simple_exec(cmd, shell);
+		return ;
+	}
 	if (cmd->next == NULL)
 		simple_exec(cmd, shell);
 	else

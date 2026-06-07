@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:38:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/06/05 19:20:20 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/06/07 21:05:20 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,19 +65,20 @@ typedef struct s_shell
 
 void	run_child(t_cmd *cmd, t_shell *shell, int *pipes, int n_cmds);
 void	add_token(t_token **tokens, t_token_type type, char *value);
+t_token	*fill_cmd(t_cmd *cmd, t_token *cursor, int *parse_error);
 void	set_last_joined(t_token *tokens, char *line, int i);
 int		choose_tokens(t_token **tokens, char *line, int *i);
 int		clean_all(pid_t *pids, int *pipes, int n_cmds);
-t_token	*fill_cmd(t_cmd *cmd, t_token *cursor);
+t_cmd	*parser(t_token *tokens, t_shell *shell);
 char	*get_path(char *cmd_name, char **env);
 void	execution(t_cmd *cmd, t_shell *shell);
 void	close_all(int *pipes, int n_cmds);
 void	exec_cmd(t_cmd *cmd, char **env);
 int		is_redir_type(t_token_type type);
+int		write_read(char *file, int mode);
 int		is_word_type(t_token_type type);
 int		exec_here_doc(char *limiter);
 void	free_tokens(t_token *tokens);
-t_cmd	*parser(t_token *tokens);
 int		*open_pipes(int n_cmds);
 int		count_cmds(t_cmd *cmd);
 void	free_cmd(t_cmd *cmd);
