@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:47:21 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/06/07 20:27:23 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/07/20 17:05:12 by hulescur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ int	main(int ac, char **av, char **env)
 	t_token	*tokens;
 	t_cmd	*cmd;
 	t_shell	shell;
-
-	(void)av;
+	
 	if (ac != 1)
 		return (ft_putstr_fd("Error : No arguments needed", 2), 1);
 	if (env == NULL || env[0] == NULL)

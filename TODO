@@ -1,7 +1,7 @@
 
 ------------------- TODO -------------------
 
-- Garbage collector
+- Garbage collector ✅ (a implementer sur chaque malloc qui dure tout le programme(ex : ENV))
 - Ajouter expander
 - Gerer $VAR et ~ (= $HOME)
 - Gerer env -i ./minishell (Environnement minimum...)

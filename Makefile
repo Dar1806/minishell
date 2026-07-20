@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 11:19:10 by nmeunier          #+#    #+#              #
-#    Updated: 2026/06/07 20:34:50 by nmeunier         ###   ########.fr        #
+#    Updated: 2026/07/20 17:03:43 by hulescur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ LIBFT = libft/ft_lstadd_back.c libft/ft_lstadd_front.c libft/ft_lstdelone.c \
 		libft/ft_memmove.c libft/ft_memset.c libft/ft_substr.c \
 		libft/ft_calloc.c libft/ft_memcmp.c libft/ft_memcpy.c \
 		libft/ft_strdup.c libft/ft_strchr.c libft/ft_split.c \
+		libft/ft_garbage.c libft/ft_ft_split.c \
 
 SRCS = $(LIBFT) src/main.c src/lexer/lexer.c src/lexer/fill_lexer.c \
 				src/parser/fill_parser.c src/exec/setup_exec.c\

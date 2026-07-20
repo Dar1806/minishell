@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_ft_split.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 14:43:39 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/07/20 16:48:21 by hulescur         ###   ########.fr       */
+/*   Updated: 2026/07/20 17:04:23 by hulescur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	ft_count(const char *s, char c)
 	return (cmp);
 }
 
-static char	*ft_stock(const char *str, char c)
+static char	*ft_ft_stock(const char *str, char c)
 {
 	int		i;
 	int		len;
@@ -49,7 +49,7 @@ static char	*ft_stock(const char *str, char c)
 	len = 0;
 	while (str[len] && !ft_isc(str[len], c))
 		len++;
-	dest = malloc(sizeof(char) * (len + 1));
+	dest = ft_malloc(sizeof(char) * (len + 1));
 	if (!dest)
 		return (NULL);
 	i = 0;
@@ -71,7 +71,7 @@ static int	process(const char **str, char c, char **tab, int *j)
 		(*str)++;
 	if (!**str)
 		return (0);
-	nvstr = ft_stock(*str, c);
+	nvstr = ft_ft_stock(*str, c);
 	if (!nvstr)
 	{
 		k = 0;
@@ -87,7 +87,7 @@ static int	process(const char **str, char c, char **tab, int *j)
 	return (0);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_ft_split(char const *s, char c)
 {
 	char		**tab;
 	const char	*str;
@@ -98,7 +98,7 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	count = ft_count(s, c);
-	tab = malloc(sizeof(char *) * (count + 1));
+	tab = ft_malloc(sizeof(char *) * (count + 1));
 	if (!tab)
 		return (NULL);
 	j = 0;
