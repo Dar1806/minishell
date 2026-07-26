@@ -1,11 +1,11 @@
 
 ------------------- TODO -------------------
 
-- Garbage collector ✅ (a implementer sur chaque malloc qui dure tout le programme(ex : ENV))
-- Ajouter expander
+- Garbage collector ✅ (free all sauf ENV a chaque nv commande et un cleanup complet incluant ENV a la fin de tout)
+- Ajouter expander 
 - Gerer $VAR et ~ (= $HOME)
 - Gerer env -i ./minishell (Environnement minimum...)
-- Variable global pour les signaux
+- Variable globale pour les signaux
 - Mettre l'env dans une liste chaine (Prevoir une fonction qui convertie cette liste chainee en char **env pour execve)
 
 SIGNAUX :
