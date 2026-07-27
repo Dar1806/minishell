@@ -1,7 +1,7 @@
 
 ------------------- TODO -------------------
 
-- Garbage collector ✅ (free all sauf ENV a chaque nv commande et un cleanup complet incluant ENV a la fin de tout)
+- Garbage collector ✅ (free all sauf ENV a chaque nv commande et cleanup complet dont ENV a la fin de tout)
 - Ajouter expander 
 - Gerer $VAR et ~ (= $HOME)
 - Gerer env -i ./minishell (Environnement minimum...)

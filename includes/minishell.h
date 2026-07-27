@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:38:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/06/07 21:05:20 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/07/26 20:46:49 by hulescur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@ typedef struct s_token
 	struct s_token			*next;
 	t_token_type			type;
 }	t_token;
+
+typedef struct	s_env
+{
+	char	*key;
+	char	*value;
+	struct	s_env *next;
+}	t_env;
 
 /*STRUCT PARSER*/
 typedef struct s_cmd
