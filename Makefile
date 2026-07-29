@@ -29,7 +29,7 @@ LIBFT = libft/ft_lstadd_back.c libft/ft_lstadd_front.c libft/ft_lstdelone.c \
 SRCS = $(LIBFT) src/main.c src/lexer/lexer.c src/lexer/fill_lexer.c \
 				src/parser/fill_parser.c src/exec/setup_exec.c\
 				src/exec/exec_cmd.c src/exec/here_doc.c \
-				src/free/free.c src/parser/parser.c \
+				src/free/free.c src/parser/parser.c src/env.c \
 				src/exec/set_std.c src/exec/get_path.c \
 				src/exec/pipe_exec.c src/parser/is_type.c
 

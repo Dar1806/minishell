@@ -79,6 +79,7 @@ int		clean_all(pid_t *pids, int *pipes, int n_cmds);
 t_cmd	*parser(t_token *tokens, t_shell *shell);
 char	*get_path(char *cmd_name, char **env);
 void	execution(t_cmd *cmd, t_shell *shell);
+void	*ft_newnode(t_env **head, char *env);
 void	close_all(int *pipes, int n_cmds);
 void	exec_cmd(t_cmd *cmd, char **env);
 int		is_redir_type(t_token_type type);
