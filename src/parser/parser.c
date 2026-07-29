@@ -50,6 +50,7 @@ t_cmd	*parser(t_token *tokens, t_shell *shell)
 	t_token	*cursor;
 	int		parse_error;
 
+	parse_error = 0;
 	if (!tokens)
 		return (NULL);
 	first = NULL;

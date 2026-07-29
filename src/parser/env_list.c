@@ -1,24 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   env_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/26 20:47:15 by hulescur          #+#    #+#             */
-/*   Updated: 2026/07/26 21:26:39 by hulescur         ###   ########.fr       */
+/*   Updated: 2026/07/29 23:23:58 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-
-int	ft_strlen(char *s)
-{
-	int i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
+#include "../../includes/minishell.h"
 
 int	find_feq(char *s)
 {
@@ -61,11 +53,24 @@ char	*splitenv(char *env, int w)
 	return (s);
 }
 
-t_env	*new_env_node(char *env)
+void	env_free_list(t_env *head)
+{
+	t_env	*tmp;
+
+	while (head)
+	{
+		tmp = head->next;
+		free(head->key);
+		free(head->value);
+		free(head);
+		head = tmp;
+	}
+}
+
+t_env	*env_new_node(t_env **head, char *env)
 {
 	t_env	*new;
 	t_env	*temp;
-	void	*ptr;
 
 	new = malloc(sizeof(t_env));
 	if (!new)
@@ -85,6 +90,22 @@ t_env	*new_env_node(char *env)
 		temp->next = new;
 	}
 	return (new);
+}
+
+t_env	*env_init_list(char **env)
+{
+	t_env	*head;
+	int		i;
+
+	head = NULL;
+	i = 0;
+	while (env[i])
+	{
+		if (!env_new_node(&head, env[i]))
+			return (env_free_list(head), NULL);
+		i++;
+	}
+	return (head);
 }
 
 // int main(void)

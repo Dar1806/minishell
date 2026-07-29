@@ -59,7 +59,7 @@ void	ft_putchar_fd(char c, int fd);
 char	*ft_ft_strdup(const char *s);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_bzero(void *s, size_t n);
-// int		ft_strlen(const char *str);
+int		ft_strlen(const char *str);
 char	*ft_strdup(const char *s);
 t_list	*ft_lstnew(void *content);
 t_list	*ft_lstlast(t_list *lst);
