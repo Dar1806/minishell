@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   fill_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 17:37:35 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/06/07 21:29:46 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/07/30 17:32:11 by hulescur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 static void	append_to_arg(t_cmd *cmd, int i, char *value)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   is_type.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 20:34:17 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/06/07 21:01:12 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/07/30 17:32:11 by hulescur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 int	is_redir_type(t_token_type type)
 {

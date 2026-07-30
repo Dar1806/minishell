@@ -6,7 +6,7 @@
 /*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:47:21 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/07/30 16:07:39 by hulescur         ###   ########.fr       */
+/*   Updated: 2026/07/30 17:35:22 by hulescur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(int ac, char **av, char **env)
 		line = readline("minishell$ ");
 		if (!line)
 			break ;
+		line = expander(line);
 		tokens = lexer(line);
 		cmd = parser(tokens, &shell);
 		execution(cmd, &shell);

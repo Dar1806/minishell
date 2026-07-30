@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 16:33:25 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/06/05 15:36:43 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/07/30 17:32:11 by hulescur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 int	count_cmds(t_cmd *cmd)
 {

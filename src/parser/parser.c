@@ -6,11 +6,11 @@
 /*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 14:10:41 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/07/30 16:09:17 by hulescur         ###   ########.fr       */
+/*   Updated: 2026/07/30 17:32:11 by hulescur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 t_cmd	*new_cmd(void)
 {

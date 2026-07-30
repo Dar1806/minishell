@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   fill_lexer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 14:52:09 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/06/05 15:35:02 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/07/30 17:32:11 by hulescur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 static int	choose_quote(t_token **tokens, char *line, int *i)
 {

@@ -6,11 +6,11 @@
 /*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 16:01:55 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/07/30 15:30:44 by hulescur         ###   ########.fr       */
+/*   Updated: 2026/07/30 17:31:31 by hulescur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 void	free_tokens(t_token *tokens)
 {
