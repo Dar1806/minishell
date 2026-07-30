@@ -3,9 +3,9 @@
 
 - Garbage collector ✅ (free all sauf ENV a chaque nv commande et cleanup complet dont ENV a la fin de tout)
 - Mettre l'env dans une liste chaine ✅ 
-	\-> (Prevoir une fonction qui convertie cette liste chainee en char **env pour execve ❌)
+	\-> (Prevoir une fonction qui convertie cette liste chainee en char **env pour execve ✅)
 - Ajouter expander 
-- Gerer $VAR et ~ (= $HOME)
+	\->Gerer $VAR et ~ (= $HOME)
 - Gerer env -i ./minishell (Environnement minimum...)
 - Variable globale pour les signaux
 

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_array.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
+/*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 23:19:15 by akkolitozer       #+#    #+#             */
-/*   Updated: 2026/07/29 23:55:06 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/07/30 15:08:49 by hulescur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../../includes/minishell.h"
 
 int	env_size(t_env *envl)
 {
@@ -23,6 +23,16 @@ int	env_size(t_env *envl)
 		i++;
 	}
 	return (i);
+}
+
+void	free_errorj(char **enva)
+{
+	int	i;
+	i = -1;
+
+	while (enva[++i])
+		free(enva[i]);
+	free(enva);
 }
 
 char	**env_list_to_array(t_env *envl)
@@ -40,7 +50,11 @@ char	**env_list_to_array(t_env *envl)
 	while (++i < lsize)
 	{
 		tmp = ft_strjoin(envl->key, "=");
+		if (!tmp)
+			return(free_errorj(enva), NULL);
 		enva[i] = ft_strjoin(tmp, envl->value);
+		if (!enva[i])
+			return(free_errorj(enva), NULL);
 		envl = envl->next;
 		free(tmp);
 	}

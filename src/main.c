@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
+/*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:47:21 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/07/29 23:14:39 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/07/30 16:07:39 by hulescur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ int	main(int ac, char **av, char **env)
 	
 	if (ac != 1)
 		return (ft_putstr_fd("Error : No arguments needed", 2), 1);
-	if (env == NULL || env[0] == NULL)
-		return (ft_putstr_fd("Error : No environment variables\n", 2), 1);
 	shell.env = env;
 	shell.exit_status = 0;
 	while (1)

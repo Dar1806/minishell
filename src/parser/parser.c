@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 14:10:41 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/06/07 20:41:04 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/07/30 16:09:17 by hulescur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static int	syntax_error(t_shell *shell)
 	shell->exit_status = 2;
 	return (2);
 }
+
 
 t_cmd	*parser(t_token *tokens, t_shell *shell)
 {
