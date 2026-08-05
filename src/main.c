@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:47:21 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/05 16:00:45 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/05 18:20:44 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int ac, char **av, char **env)
 	shell.exit_status = 0;
 	while (1)
 	{
-		line = readline("minishell$ ");
+		line = readline("minishell$ ");z`
 		if (!line)
 			break ;
 		if (line[0])

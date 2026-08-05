@@ -6,11 +6,11 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 15:25:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/05 18:08:54 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/05 18:20:00 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 void	handle_heredoc(t_cmd *cmd, t_token *token)
 {

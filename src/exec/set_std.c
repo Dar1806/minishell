@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   set_std.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 15:17:03 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/07/30 17:32:11 by hulescur         ###   ########.fr       */
+/*   Updated: 2026/08/05 18:20:16 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include <errno.h>
+#include "../../includes/minishell.h"
 
 int	write_read(char *file, int mode)
 {
