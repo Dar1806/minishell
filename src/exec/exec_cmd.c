@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 15:44:08 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/07/30 17:32:11 by hulescur         ###   ########.fr       */
+/*   Updated: 2026/08/05 16:51:33 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <errno.h>
 
 static void	cmd_not_found(char *args)
 {
@@ -31,6 +32,19 @@ void	exec_cmd(t_cmd *cmd, char **env)
 	if (!path)
 		cmd_not_found(cmd->args[0]);
 	execve(path, cmd->args, env);
-	ft_putstr_fd("minishell: execve failed\n", 2);
+	if (errno == EISDIR)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(cmd->args[0], 2);
+		ft_putstr_fd(": Is a directory\n", 2);
+	}
+	else if (errno == EACCES || errno == ENOEXEC)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(cmd->args[0], 2);
+		ft_putstr_fd(": Permission denied\n", 2);
+	}
+	else
+		ft_putstr_fd("minishell: execve failed\n", 2);
 	exit(126);
 }

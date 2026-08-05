@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:47:21 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/07/30 17:35:22 by hulescur         ###   ########.fr       */
+/*   Updated: 2026/08/05 16:00:45 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int ac, char **av, char **env)
 	t_token	*tokens;
 	t_cmd	*cmd;
 	t_shell	shell;
-	
+
 	if (ac != 1)
 		return (ft_putstr_fd("Error : No arguments needed", 2), 1);
 	shell.env = env;
@@ -28,7 +28,8 @@ int	main(int ac, char **av, char **env)
 		line = readline("minishell$ ");
 		if (!line)
 			break ;
-		line = expander(line);
+		if (line[0])
+			add_history(line);
 		tokens = lexer(line);
 		cmd = parser(tokens, &shell);
 		execution(cmd, &shell);

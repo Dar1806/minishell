@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_lexer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 14:52:09 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/07/30 17:32:11 by hulescur         ###   ########.fr       */
+/*   Updated: 2026/08/05 16:47:56 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,9 @@ int	choose_tokens(t_token **tokens, char *line, int *i)
 		choose_redir(tokens, line, i);
 		(*i)++;
 	}
+	else if (line[*i] == '&')
+		return (ft_putstr_fd("minishell: syntax error"
+			" near unexpected token `&&'\n", 2), -1);
 	else if (line[*i] == '\'' || line[*i] == '"')
 		return (handle_quote_token(tokens, line, i));
 	else
