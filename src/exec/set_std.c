@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <errno.h>
 
 int	write_read(char *file, int mode)
 {
@@ -28,7 +29,12 @@ int	write_read(char *file, int mode)
 	{
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(file, 2);
-		ft_putstr_fd(": cannot open file\n", 2);
+		if (errno == ENOENT)
+			ft_putstr_fd(": No such file or directory\n", 2);
+		else if (errno == EACCES)
+			ft_putstr_fd(": Permission denied\n", 2);
+		else
+			ft_putstr_fd(": cannot open file\n", 2);
 	}
 	return (fd);
 }

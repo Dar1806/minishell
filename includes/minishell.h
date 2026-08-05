@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:38:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/05 16:45:22 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/05 18:07:03 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ t_token	*fill_cmd(t_cmd *cmd, t_token *cursor, int *parse_error);
 void	set_last_joined(t_token *tokens, char *line, int i);
 int		choose_tokens(t_token **tokens, char *line, int *i);
 int		clean_all(pid_t *pids, int *pipes, int n_cmds);
+void	handle_heredoc(t_cmd *cmd, t_token *token);
 t_cmd	*parser(t_token *tokens, t_shell *shell);
 char	*get_path(char *cmd_name, char **env);
 void	execution(t_cmd *cmd, t_shell *shell);

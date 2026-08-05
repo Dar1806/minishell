@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 17:37:35 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/07/30 17:32:11 by hulescur         ###   ########.fr       */
+/*   Updated: 2026/08/05 18:06:41 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static	int	handle_redir(t_cmd *cmd, t_token **token, int *parse_error)
 	else if (type == TOKEN_REDIR_IN)
 		cmd->infile = ft_strdup((*token)->value);
 	else if (type == TOKEN_HEREDOC)
-		cmd->here_doc = ft_strdup((*token)->value);
+		handle_heredoc(cmd, *token);
 	return (0);
 }
 
