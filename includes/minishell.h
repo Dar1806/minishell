@@ -68,7 +68,7 @@ typedef struct s_cmd
 typedef struct s_shell
 {
 	char			**env;
-	int				exit_status;
+	int				ex_status;
 }	t_shell;
 
 void	run_child(t_cmd *cmd, t_shell *shell, int *pipes, int n_cmds);

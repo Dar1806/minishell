@@ -6,11 +6,11 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 17:37:35 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/05 18:06:41 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/05 18:30:00 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 static void	append_to_arg(t_cmd *cmd, int i, char *value)
 {

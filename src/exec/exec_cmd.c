@@ -6,12 +6,11 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 15:44:08 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/05 16:51:33 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/05 18:29:59 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-#include <errno.h>
+#include "../../includes/minishell.h"
 
 static void	cmd_not_found(char *args)
 {

@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:47:21 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/05 18:20:59 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/05 18:23:44 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int ac, char **av, char **env)
 	if (ac != 1)
 		return (ft_putstr_fd("Error : No arguments needed", 2), 1);
 	shell.env = env;
-	shell.exit_status = 0;
+	shell.ex_status = 0;
 	while (1)
 	{
 		line = readline("minishell$ ");
@@ -38,5 +38,5 @@ int	main(int ac, char **av, char **env)
 		free(line);
 	}
 	rl_clear_history();
-	return ((void)av, shell.exit_status);
+	return ((void)av, shell.ex_status);
 }

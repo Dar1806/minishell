@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 16:33:25 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/05 18:20:00 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/05 18:23:44 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,11 @@ static int	wait_all(pid_t *pids, int n_cmds)
 
 int	clean_all(pid_t *pids, int *pipes, int n_cmds)
 {
-	int	exit_status;
+	int	ex_status;
 
 	close_all(pipes, n_cmds);
-	exit_status = wait_all(pids, n_cmds);
+	ex_status = wait_all(pids, n_cmds);
 	free(pipes);
 	free(pids);
-	return (exit_status);
+	return (ex_status);
 }

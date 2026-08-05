@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 14:36:20 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/05 18:20:00 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/05 18:23:44 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static void	simple_exec(t_cmd *cmd, t_shell *shell)
 		run_child(cmd, shell, NULL, 0);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
-		shell->exit_status = WEXITSTATUS(status);
+		shell->ex_status = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
-		shell->exit_status = (128 + WTERMSIG(status));
+		shell->ex_status = (128 + WTERMSIG(status));
 }
 
 static int	*setup_pipes(int *pipes, int i, int n_cmds)
@@ -65,7 +65,7 @@ void	pipe_exec(t_cmd *cmd, t_shell *shell)
 			run_child(cmd, shell, setup_pipes(pipes, i, n_cmds), n_cmds);
 		cmd = cmd->next;
 	}
-	shell->exit_status = clean_all(pids, pipes, n_cmds);
+	shell->ex_status = clean_all(pids, pipes, n_cmds);
 }
 
 void	execution(t_cmd *cmd, t_shell *shell)
