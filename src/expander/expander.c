@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/30 17:52:04 by hulescur          #+#    #+#             */
-/*   Updated: 2026/08/06 18:20:36 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/06 18:39:17 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ char	*get_var_key(char *word)
 	i = 0;
 	if (word[i] == '?')
 		return (ft_strdup("?"));
-	while (word[i] && (ft_isalnum(word[i]) || (word[i] == '_' )))
+	while (word[i] && (ft_isalpha(word[i]) || (word[i] == '_' 
+				|| (ft_isalnum(word[i] && i != 0)))))
 		i++;
 	return (ft_substr(word, 0, i));
 }
@@ -78,7 +79,12 @@ void	expander(char **word, t_shell *shell)
 	{
 		if ((*word)[i] == '$' && (*word)[i + 1] && (ft_isalnum((*word)[i + 1])
 				|| (*word)[i + 1] == '?' || (*word)[i + 1] == '_'))
-			envv_handler(*word, &expanded, &i, shell);
+		{
+			if (ft_isdigit((*word)[i + 1]))
+				i += 2;
+			else
+				envv_handler(*word, &expanded, &i, shell);
+		}
 		else
 		{
 			old = expanded;
