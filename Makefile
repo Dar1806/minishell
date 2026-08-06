@@ -6,7 +6,7 @@
 #    By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 11:19:10 by nmeunier          #+#    #+#              #
-#    Updated: 2026/08/05 23:25:22 by akkolitozer      ###   ########.fr        #
+#    Updated: 2026/08/06 16:28:02 by akkolitozer      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,14 +24,15 @@ LIBFT = libft/ft_lstadd_back.c libft/ft_lstadd_front.c libft/ft_lstdelone.c \
 		libft/ft_memmove.c libft/ft_memset.c libft/ft_substr.c \
 		libft/ft_calloc.c libft/ft_memcmp.c libft/ft_memcpy.c \
 		libft/ft_strdup.c libft/ft_strchr.c libft/ft_split.c \
-		libft/ft_garbage.c libft/ft_ft_split.c \
+		libft/ft_garbage.c libft/ft_ft_split.c libft/ft_strnjoin.c\
 
 SRCS = $(LIBFT) src/main.c src/lexer/lexer.c src/lexer/fill_lexer.c \
 				src/free/free.c src/parser/parser.c src/parser/env_list.c \
 				src/parser/fill_parser.c src/exec/setup_exec.c\
+				src/expander/expander.c  src/exec/env_array.c\
+				src/exec/pipe_exec.c src/parser/is_type.c \
 				src/exec/exec_cmd.c src/exec/here_doc.c \
 				src/exec/set_std.c src/exec/get_path.c \
-				src/exec/pipe_exec.c src/parser/is_type.c
 
 CC = cc
 RM = rm -f

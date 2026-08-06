@@ -6,7 +6,7 @@
 /*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:47:21 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/06 02:51:17 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/06 16:04:09 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int ac, char **av, char **env)
 	t_cmd	*cmd;
 	t_shell	shell;
 
-	shell->envl = env_init_list(env);
+	shell.envl = env_init_list(env);
 	if (ac != 1)
 		return (ft_putstr_fd("Error : No arguments needed", 2), 1);
 	shell.env = env;

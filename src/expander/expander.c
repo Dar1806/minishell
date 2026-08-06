@@ -6,7 +6,7 @@
 /*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/30 17:52:04 by hulescur          #+#    #+#             */
-/*   Updated: 2026/08/06 03:08:26 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/06 16:54:25 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,29 @@ char	*get_var_key(char *word)
 	return (ft_substr(word, 0, i));
 }
 
-void	envv_handler(char *str, char **expanded, int *i, t_shell *shell)
+void	envv_handler(char *word, char **expanded, int *i, t_shell *shell)
 {
 	char	*key;
-
-	key = get_var_key(&word[*i]);
-	value = get_envv(shell->envl, key);
+	char	*value;
+	
+	(*i)++;
+	key = get_var_key(word + *i);
 	if (!key)
 		return ;
-	if (str[*i] == '?')
+	if (word[*i] == '?')
+	{
+		value = ft_itoa(shell->ex_status);
+		*expanded = ft_strjoin(*expanded, value);
+		(*i)++;
+	}
 	else
 	{
-		expanded = ft_strjoin(expanded, value);
-		*i += ft_strlen(value);
+		value = get_envv(shell->envl, key);
+		*expanded = ft_strjoin(*expanded, value);
+		*i += ft_strlen(key);
 	}
+	free (key);
+	free (value);
 }
 
 void	expander(char **word, t_shell *shell)
@@ -59,16 +68,16 @@ void	expander(char **word, t_shell *shell)
 	char	*expanded;
 	int		i;
 
-	i = -1;
+	i = 0;
 	expanded = ft_strdup("");
-	while ((*word)[++i])
+	while ((*word)[i])
 	{
 		if ((*word)[i] == '$' && (*word)[i + 1] && (ft_isalnum((*word)[i + 1])
 				|| (*word)[i + 1] == '?'))
-			ennv_handler(*word, &expanded, &(i++), shell);
+			envv_handler(*word, &expanded, &i, shell);
 		else
 			expanded = ft_strnjoin(expanded, &(*word)[i++], 1);
 	}
 	free (*word);
-	*word = *expanded;
+	*word = expanded;
 }

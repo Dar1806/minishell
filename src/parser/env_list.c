@@ -6,7 +6,7 @@
 /*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/26 20:47:15 by hulescur          #+#    #+#             */
-/*   Updated: 2026/08/06 01:07:30 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/06 16:52:44 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,28 +28,28 @@ char	*splitenv(char *env, int w)
 {
 	char *s;
 	int	i;
+	int	start;
+	int	len;
 
 	i = -1;
 	if (w == 1)
 	{
-		s = malloc(find_feq(env) + 1);
-		if (!s)
-			return (NULL);
-		while (++i < find_feq(env))
-			s[i] = env[i];
-		s[i] = 0;
+		start = 0;
+		len = find_feq(env);
 	}
 	else if (w == 2)
 	{
-		s = malloc(ft_strlen(env) - find_feq(env));
-		if (!s)
-			return (NULL);
-		while (++i < ft_strlen(env) - find_feq(env))
-			s[i] = env[i + find_feq(env) + 1];
-		s[i] = 0;
+		start = find_feq(env) + 1;
+		len = ft_strlen(env) - start;
 	}
 	else 
 		return (NULL);
+	s = malloc((len + 1) * sizeof(char));
+	if (!s)
+		return (NULL);
+	while (++i < len)
+		s[i] = env[start + i];
+	s[i] = 0;
 	return (s);
 }
 

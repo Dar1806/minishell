@@ -6,7 +6,7 @@
 /*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 23:19:15 by akkolitozer       #+#    #+#             */
-/*   Updated: 2026/08/06 02:49:58 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/06 16:48:02 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ char	*get_envv(t_env *envl, char *key)
 	curr = envl;
 	while (curr)
 	{
-		if (!ft_strcmp(curr->key, key))
-			return (curr->value);
+		if (!ft_strncmp(curr->key, key, ft_strlen(key))
+				&& ft_strlen(key) == ft_strlen(curr->key))
+			return (ft_strdup(curr->value));
 		curr = curr->next;
 	}
-	return ("");
+	return (ft_strdup(""));
 }
 
 int	env_size(t_env *envl)
