@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/30 17:52:04 by hulescur          #+#    #+#             */
-/*   Updated: 2026/08/06 17:52:41 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/06 18:02:15 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*get_var_key(char *word)
 	i = 0;
 	if (word[i] == '?')
 		return (ft_strdup("?"));
-	while (word[i] && (ft_isalnum(word[i]) || word[i] == '_'))
+	while (word[i] && (ft_isalnum(word[i]) || (word[i] == '_' && i != 0)))
 		i++;
 	return (ft_substr(word, 0, i));
 }
