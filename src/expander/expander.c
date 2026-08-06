@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/30 17:52:04 by hulescur          #+#    #+#             */
-/*   Updated: 2026/08/06 16:54:25 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/06 17:52:41 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,13 @@ void	envv_handler(char *word, char **expanded, int *i, t_shell *shell)
 {
 	char	*key;
 	char	*value;
+	char	*old;
 	
 	(*i)++;
 	key = get_var_key(word + *i);
 	if (!key)
 		return ;
+	old = *expanded;
 	if (word[*i] == '?')
 	{
 		value = ft_itoa(shell->ex_status);
@@ -59,6 +61,7 @@ void	envv_handler(char *word, char **expanded, int *i, t_shell *shell)
 		*expanded = ft_strjoin(*expanded, value);
 		*i += ft_strlen(key);
 	}
+	free(old);
 	free (key);
 	free (value);
 }
@@ -66,6 +69,7 @@ void	envv_handler(char *word, char **expanded, int *i, t_shell *shell)
 void	expander(char **word, t_shell *shell)
 {
 	char	*expanded;
+	char	*old;
 	int		i;
 
 	i = 0;
@@ -76,7 +80,11 @@ void	expander(char **word, t_shell *shell)
 				|| (*word)[i + 1] == '?'))
 			envv_handler(*word, &expanded, &i, shell);
 		else
+		{
+			old = expanded;
 			expanded = ft_strnjoin(expanded, &(*word)[i++], 1);
+			free(old);
+		}
 	}
 	free (*word);
 	*word = expanded;
