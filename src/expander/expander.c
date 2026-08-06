@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/30 17:52:04 by hulescur          #+#    #+#             */
-/*   Updated: 2026/08/06 18:02:15 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/06 18:20:36 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*get_var_key(char *word)
 	i = 0;
 	if (word[i] == '?')
 		return (ft_strdup("?"));
-	while (word[i] && (ft_isalnum(word[i]) || (word[i] == '_' && i != 0)))
+	while (word[i] && (ft_isalnum(word[i]) || (word[i] == '_' )))
 		i++;
 	return (ft_substr(word, 0, i));
 }
@@ -77,7 +77,7 @@ void	expander(char **word, t_shell *shell)
 	while ((*word)[i])
 	{
 		if ((*word)[i] == '$' && (*word)[i + 1] && (ft_isalnum((*word)[i + 1])
-				|| (*word)[i + 1] == '?'))
+				|| (*word)[i + 1] == '?' || (*word)[i + 1] == '_'))
 			envv_handler(*word, &expanded, &i, shell);
 		else
 		{
