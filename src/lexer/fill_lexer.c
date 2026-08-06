@@ -87,6 +87,8 @@ static void	read_word(t_token **tokens, char *line, int *i, t_shell *shell)
 	expander(&str, shell);
 	if (str && str[0])
 		add_token(tokens, TOKEN_WORD, str);
+	else
+		free(str);
 	(*i) = j;
 }
 

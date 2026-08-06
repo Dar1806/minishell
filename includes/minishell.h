@@ -93,6 +93,7 @@ int		is_word_type(t_token_type type);
 int		exec_here_doc(char *limiter);
 void	free_tokens(t_token *tokens);
 t_env	*env_init_list(char **env);
+void	env_free_list(t_env *head);
 int		*open_pipes(int n_cmds);
 int		count_cmds(t_cmd *cmd);
 void	free_cmd(t_cmd *cmd);

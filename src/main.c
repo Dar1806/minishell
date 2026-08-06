@@ -39,5 +39,6 @@ int	main(int ac, char **av, char **env)
 		free(line);
 	}
 	rl_clear_history();
+	env_free_list(shell.envl);
 	return ((void)av, shell.ex_status);
 }
