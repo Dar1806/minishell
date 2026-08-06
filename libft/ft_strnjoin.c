@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_type.c                                          :+:      :+:    :+:   */
+/*   ft_strnjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/07 20:34:17 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/05 23:26:31 by akkolitozer      ###   ########.fr       */
+/*   Created: 2026/08/06 01:33:16 by akkolitozer       #+#    #+#             */
+/*   Updated: 2026/08/06 01:57:16 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_redir_type(t_token_type type)
+char	*ft_strnjoin(char const *s1, char const *s2, int n)
 {
-	return (type == TOKEN_REDIR_IN || type == TOKEN_REDIR_OUT
-		|| type == TOKEN_REDIR_APPEND || type == TOKEN_HEREDOC);
-}
+	char	*new;
+	int		i;
+	int		j;
+	int		len_s1;
 
-int	is_word_type(t_token_type type)
-{
-	return (type == TOKEN_WORD || type == TOKEN_SINGLE_QUOTES
-		|| type == TOKEN_DOUBLE_QUOTES);
+	if (!s1 && !s2)
+		return (NULL);
+	len_s1 = ft_strlen(s1);
+	new = ft_malloc((len_s1 + n + 1));
+	if (!new)
+		return (NULL);
+	i = -1;
+	while (s1[++i])
+		new[i] = s1[i];
+	j = -1;
+	while (s2[++j] && j < n)
+		new[i + j] = s2[j];
+	new[i + j] = '\0';
+	return (new);
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 12:24:07 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/05 18:20:00 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/06 01:23:42 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 void	set_last_joined(t_token *tokens, char *line, int i)
 {
@@ -52,7 +52,7 @@ void	add_token(t_token **tokens, t_token_type type, char *value)
 	}
 }
 
-t_token	*lexer(char *line)
+t_token	*lexer(char *line, t_shell *shell)
 {
 	t_token	*tokens;
 	int		i;
@@ -61,7 +61,7 @@ t_token	*lexer(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (choose_tokens(&tokens, line, &i) == -1)
+		if (choose_tokens(&tokens, line, &i, shell) == -1)
 		{
 			free_tokens(tokens);
 			return (NULL);

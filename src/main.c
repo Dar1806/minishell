@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:47:21 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/05 18:23:44 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/06 02:51:17 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 int	main(int ac, char **av, char **env)
 {
@@ -19,6 +19,7 @@ int	main(int ac, char **av, char **env)
 	t_cmd	*cmd;
 	t_shell	shell;
 
+	shell->envl = env_init_list(env);
 	if (ac != 1)
 		return (ft_putstr_fd("Error : No arguments needed", 2), 1);
 	shell.env = env;
@@ -30,7 +31,7 @@ int	main(int ac, char **av, char **env)
 			break ;
 		if (line[0])
 			add_history(line);
-		tokens = lexer(line);
+		tokens = lexer(line, &shell);
 		cmd = parser(tokens, &shell);
 		execution(cmd, &shell);
 		free_tokens(tokens);

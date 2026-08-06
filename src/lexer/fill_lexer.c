@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   fill_lexer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 14:52:09 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/05 18:30:56 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/06 02:28:41 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
-static int	choose_quote(t_token **tokens, char *line, int *i)
+static int	choose_quote(t_token **tokens, char *line, int *i, t_shell *shell)
 {
 	int				j;
 	char			*str;
@@ -21,10 +21,9 @@ static int	choose_quote(t_token **tokens, char *line, int *i)
 
 	j = *i;
 	quote = line[j];
+	type = TOKEN_DOUBLE_QUOTES;
 	if (quote == '\'')
 		type = TOKEN_SINGLE_QUOTES;
-	else
-		type = TOKEN_DOUBLE_QUOTES;
 	j++;
 	while (line[j] && line[j] != quote)
 		j++;
@@ -34,6 +33,8 @@ static int	choose_quote(t_token **tokens, char *line, int *i)
 		return (-1);
 	}
 	str = ft_substr(line, (*i) + 1, j - *i - 1);
+	if (type == TOKEN_DOUBLE_QUOTES)
+		expander(&str, shell);
 	add_token(tokens, type, str);
 	*i = j;
 	return (0);
@@ -67,7 +68,7 @@ static void	choose_redir(t_token **tokens, char *line, int *i)
 	(*i) = j;
 }
 
-static void	read_word(t_token **tokens, char *line, int *i)
+static void	read_word(t_token **tokens, char *line, int *i, t_shell *shell)
 {
 	int		j;
 	char	*str;
@@ -83,13 +84,15 @@ static void	read_word(t_token **tokens, char *line, int *i)
 		return ;
 	}
 	str = ft_substr(line, (*i), j - *i);
-	add_token(tokens, TOKEN_WORD, str);
+	expander(&str, shell);
+	if (str && str[0])
+		add_token(tokens, TOKEN_WORD, str);
 	(*i) = j;
 }
 
-static int	handle_quote_token(t_token **tokens, char *line, int *i)
+static int	handle_quote_token(t_token **tokens, char *line, int *i, t_shell *shell)
 {
-	if (choose_quote(tokens, line, i) == -1)
+	if (choose_quote(tokens, line, i, shell) == -1)
 		return (-1);
 	if (line[*i])
 		(*i)++;
@@ -97,7 +100,7 @@ static int	handle_quote_token(t_token **tokens, char *line, int *i)
 	return (0);
 }
 
-int	choose_tokens(t_token **tokens, char *line, int *i)
+int	choose_tokens(t_token **tokens, char *line, int *i, t_shell *shell)
 {
 	if (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
@@ -115,10 +118,10 @@ int	choose_tokens(t_token **tokens, char *line, int *i)
 		return (ft_putstr_fd("minishell: syntax error"
 			" near unexpected token `&&'\n", 2), -1);
 	else if (line[*i] == '\'' || line[*i] == '"')
-		return (handle_quote_token(tokens, line, i));
+		return (handle_quote_token(tokens, line, i, shell));
 	else
 	{
-		read_word(tokens, line, i);
+		read_word(tokens, line, i, shell);
 		set_last_joined(*tokens, line, *i);
 	}
 	return (0);

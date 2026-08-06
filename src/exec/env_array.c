@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   env_array.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 23:19:15 by akkolitozer       #+#    #+#             */
-/*   Updated: 2026/08/05 18:20:00 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/06 02:49:58 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
+
+char	*get_envv(t_env *envl, char *key)
+{
+	t_env	*curr;
+
+	curr = envl;
+	while (curr)
+	{
+		if (!ft_strcmp(curr->key, key))
+			return (curr->value);
+		curr = curr->next;
+	}
+	return ("");
+}
 
 int	env_size(t_env *envl)
 {
