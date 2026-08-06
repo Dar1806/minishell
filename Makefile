@@ -6,7 +6,7 @@
 #    By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 11:19:10 by nmeunier          #+#    #+#              #
-#    Updated: 2026/08/06 16:28:02 by akkolitozer      ###   ########.fr        #
+#    Updated: 2026/08/06 19:16:18 by akkolitozer      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,24 +42,92 @@ RDFLAGS = -lreadline
 
 NAME = minishell
 OBJS = $(SRCS:.c=.o)
+TOTAL := $(words $(SRCS))
+N := 0
+
+# Colors
+GREEN   = \033[0;32m
+CYAN    = \033[0;36m
+YELLOW  = \033[0;33m
+RED     = \033[0;31m
+MAGENTA = \033[0;35m
+RESET   = \033[0m
+BOLD    = \033[1m
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(OBJS) $(RDFLAGS) -o $(NAME)
+$(NAME): banner_start $(OBJS)
+	@printf "$(YELLOW)Linking minishell...$(RESET)\n"
+	@$(CC) $(OBJS) $(RDFLAGS) -o $(NAME)
+	@printf "\n"
+	@printf "$(BOLD)\033[1;37m"
+	@printf '%s\n' '		                                                 '
+	@printf '%s\n' '		                     .++##=                      '
+	@printf '%s\n' '		                  .*****###**-                   '
+	@printf '%s\n' '		              ..**+*****%###****=                '
+	@printf '%s\n' '		           ..=*+++******#%###****+=-             '
+	@printf '%s\n' '		         .=+=+=++*******#%%###*#*+*+=*           '
+	@printf '%s\n' '		        :++====++*******##%###****+*=**:         '
+	@printf '%s\n' '		       *+===++*******#**##%%##**#*+*++*==        '
+	@printf '%s\n' '		      *+..++**#***+*****%#####*****+=+=-:+       '
+	@printf '%s\n' '		     *+=...=:===*=++**##%#####**=++++==--::      '
+	@printf '%s\n' '		    ++++=*+====..+.++**#%#%#*+++++===--**:+*     '
+	@printf '%s\n' '		    +*++===***+==...=.*-*%+.:+===++**++**+++:    '
+	@printf '%s\n' '		   =****#**###***++++++.@#:*####%%%@@#@%##+=:    '
+	@printf '%s\n' '		    #*%%%%%%%#=.....%%#**+%%%%%%%%%%%%%%%#*+     '
+	@printf '%s\n' '		   .=#+--------+*###%%%%%@%#**#*+--------+#=.=   '
+	@printf '%s\n' '		  @@%#                  #+.               **@@%  '
+	@printf '%s\n' '		    **                 ./+*               .#     '
+	@printf '%s\n' '		    **+              =/..==++            :+*     '
+	@printf '%s\n' '		    ***+++--____==+++=...++=++++____===--:::     '
+	@printf '%s\n' '		    *%#=%%%::+=#*#+=+....+++=+=++++++===--#@     '
+	@printf '%s\n' '		    ###%%%#-%%%##++**...-=+*=##*+=+++=%##+*%     '
+	@printf '%s\n' '		      ##%%%%#####.=#:....++%###*=+*%%%%##*+      '
+	@printf '%s\n' '		        %%%%%.####*#.:..+@@%###-=+*#%%%#:        '
+	@printf '%s\n' '		          %%#*####*#+#.%@%##*##=#*####           '
+	@printf '%s\n' '		           #%####>*#%%#%#%%####*<%%%#            '
+	@printf '%s\n' '		           ######-              -%%%#            '
+	@printf '%s\n' '		            #%###*              .%%%*            '
+	@printf '%s\n' '		            %%.%#.              .=%%             '
+	@printf '%s\n' '		            %%.#%-              .#%%             '
+	@printf '%s\n' '		            %%###%              %%%%             '
+	@printf '%s\n' '		             %%##%              %%%*             '
+	@printf '%s\n' '		             %%###             .%%#              '
+	@printf '%s\n' '		             #%*#*             *%%%              '
+	@printf '%s\n' '		             %%.##             %%%%              '
+	@printf '%s\n' '		             :%=##             *%%*              '
+	@printf '%s\n' '		              %##/             *%%.              '
+	@printf "$(RESET)\n"
+	
+	@printf '%s\n' '___  ________ _   _ _____ _____ _   _  _____ _      _      ______ _____  ___ ________   __'
+	@printf '%s\n' '|  \/  |_   _| \ | |_   _/  ___| | | ||  ___| |    | |     | ___ \  ___|/ _ \|  _  \ \ / /'
+	@printf '%s\n' '| .  . | | | |  \| | | | \ `--.| |_| || |__ | |    | |     | |_/ / |__ / /_\ \ | | |\ V / '
+	@printf '%s\n' '| |\/| | | | | . ` | | |  `--. \  _  ||  __|| |    | |     |    /|  __||  _  | | | | \ /  '
+	@printf '%s\n' '| |  | |_| |_| |\  |_| |_/\__/ / | | || |___| |____| |____ | |\ \| |___| | | | |/ /  | |  '
+	@printf '%s\n' '\_|  |_/\___/\_| \_/\___/\____/\_| |_/\____/\_____/\_____/ \_| \_\____/\_| |_/___/   \_/'
+	@printf "$(RESET)\n"
+
+banner_start:
+	@printf "$(MAGENTA)$(BOLD)ATM git:(main) make$(RESET)\n"
+	@printf "$(MAGENTA)Construction de la Libft...$(RESET)\n"
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@printf "$(CYAN)Compiling:$(RESET)%s\n" "$<"
+
+libft_done:
+	@printf "$(GREEN)libft.a est compilé avec succès$(RESET)\n"
 
 clean:
-	$(RM) $(OBJS)
+	@$(RM) $(OBJS)
+	@printf "$(RED)Objets supprimés$(RESET)\n"
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
+	@printf "$(RED)$(NAME) supprimé$(RESET)\n"
 
 re: fclean all
 
 bonus_re: fclean bonus
 
-.PHONY: all bonus clean fclean re bonus_re
-
+.PHONY: all bonus clean fclean re bonus_re banner_start libft_done
