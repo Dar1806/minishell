@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 14:36:20 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/05 23:26:31 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/08 14:08:47 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void	pipe_exec(t_cmd *cmd, t_shell *shell)
 
 void	execution(t_cmd *cmd, t_shell *shell)
 {
+	int	code;
+
 	if (!cmd)
 		return ;
 	if (!cmd->args || !cmd->args[0])
@@ -79,7 +81,13 @@ void	execution(t_cmd *cmd, t_shell *shell)
 		return ;
 	}
 	if (cmd->next == NULL)
-		simple_exec(cmd, shell);
+	{
+		code = is_built_ins(cmd->args[0]);
+		if (code != -1)
+			exec_built_ins(cmd, shell, code);
+		else
+			simple_exec(cmd, shell);
+	}
 	else
 		pipe_exec(cmd, shell);
 }

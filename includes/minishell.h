@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:38:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/08 13:05:38 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/08 14:53:31 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int		choose_tokens(t_token **tokens, char *line, int *i, t_shell *shell);
 void	run_child(t_cmd *cmd, t_shell *shell, int *pipes, int n_cmds);
 void	add_token(t_token **tokens, t_token_type type, char *value);
 t_token	*fill_cmd(t_cmd *cmd, t_token *cursor, int *parse_error);
+void 	exec_built_ins(t_cmd *cmd, t_shell *shell, int code);
 void	set_last_joined(t_token *tokens, char *line, int i);
 int		clean_all(pid_t *pids, int *pipes, int n_cmds);
 void	handle_heredoc(t_cmd *cmd, t_token *token);
@@ -82,6 +83,7 @@ t_cmd	*parser(t_token *tokens, t_shell *shell);
 char	*get_path(char *cmd_name, char **env);
 void	execution(t_cmd *cmd, t_shell *shell);
 void	expander(char **word, t_shell *shell);
+void	ft_echo(t_cmd *cmd, t_shell *shell);
 t_token	*lexer(char *line, t_shell *shell);
 void	close_all(int *pipes, int n_cmds);
 char	*get_envv(t_env *envl, char *key);
@@ -93,6 +95,7 @@ int		exec_here_doc(char *limiter);
 void	free_tokens(t_token *tokens);
 t_env	*env_init_list(char **env);
 void	env_free_list(t_env *head);
+int		is_built_ins(char *line);
 int		*open_pipes(int n_cmds);
 int		count_cmds(t_cmd *cmd);
 void	free_cmd(t_cmd *cmd);
