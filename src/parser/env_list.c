@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/26 20:47:15 by hulescur          #+#    #+#             */
-/*   Updated: 2026/08/06 16:52:44 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/08 13:08:53 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	find_feq(char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i] && s[i] != '=')
@@ -26,10 +26,10 @@ int	find_feq(char *s)
 
 char	*splitenv(char *env, int w)
 {
-	char *s;
-	int	i;
-	int	start;
-	int	len;
+	char	*s;
+	int		i;
+	int		start;
+	int		len;
 
 	i = -1;
 	if (w == 1)
@@ -42,7 +42,7 @@ char	*splitenv(char *env, int w)
 		start = find_feq(env) + 1;
 		len = ft_strlen(env) - start;
 	}
-	else 
+	else
 		return (NULL);
 	s = malloc((len + 1) * sizeof(char));
 	if (!s)
@@ -79,7 +79,7 @@ t_env	*env_new_node(t_env **head, char *env)
 	new->key = splitenv(env, 1);
 	new->value = splitenv(env, 2);
 	if (!new->value || !new->key)
-		return(free(new->key), free(new->value), free(new), NULL);
+		return (free(new->key), free(new->value), free(new), NULL);
 	if (*head == NULL)
 		*head = new;
 	else

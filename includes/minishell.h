@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:38:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/06 16:09:58 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/08 13:05:38 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,10 @@
 # include <readline/history.h>
 # include <sys/wait.h>
 # include <unistd.h>
-#include <errno.h>
+# include <errno.h>
 # include <stdlib.h>
 # include <fcntl.h>
 # include "libft.h"
-
 
 typedef enum e_token_type
 {
@@ -46,11 +45,11 @@ typedef struct s_token
 	t_token_type			type;
 }	t_token;
 
-typedef struct	s_env
+typedef struct s_env
 {
 	char			*key;
 	char			*value;
-	struct	s_env	*next;
+	struct s_env	*next;
 }	t_env;
 
 /*STRUCT PARSER*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/30 17:52:04 by hulescur          #+#    #+#             */
-/*   Updated: 2026/08/06 18:49:19 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/08 13:11:34 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*get_var_key(char *word)
 	i = 0;
 	if (word[i] == '?')
 		return (ft_strdup("?"));
-	while (word[i] && (ft_isalpha(word[i]) || (word[i] == '_' 
+	while (word[i] && (ft_isalpha(word[i]) || (word[i] == '_'
 				|| (ft_isalnum(word[i] && i != 0)))))
 		i++;
 	return (ft_substr(word, 0, i));
@@ -44,7 +44,7 @@ void	envv_handler(char *word, char **expanded, int *i, t_shell *shell)
 	char	*key;
 	char	*value;
 	char	*old;
-	
+
 	(*i)++;
 	key = get_var_key(word + *i);
 	if (!key)
