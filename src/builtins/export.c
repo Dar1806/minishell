@@ -6,11 +6,16 @@
 /*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 04:02:04 by akkolitozer       #+#    #+#             */
-/*   Updated: 2026/08/09 05:15:49 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/09 19:19:04 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	print_env(t_env **envl)
+{
+	
+}
 
 char	*get_envk(char *str)
 {
@@ -29,6 +34,23 @@ char	*get_envk(char *str)
 	return (key);
 }
 
+int	set_env_value(t_env *new, char *envv)
+{
+	new->key = get_envk(envv);
+	if (!new->key)
+    	return (0);
+	if (find_feq(envv))
+	{
+		if (!(find_feq(envv) == ft_strlen(envv)))
+			new->value = ft_strdup(envv + find_feq(envv));
+		else
+			new->value = ft_strdup("");
+	}
+	else
+		new->value = NULL;
+	return (1);
+}
+
 void	env_export(t_env **envl, char *envv)
 {
 	t_env	*new;
@@ -36,17 +58,15 @@ void	env_export(t_env **envl, char *envv)
 
 	new = malloc(sizeof(t_env));
 	if (!new)
-		return (NULL);
+		return ;
 	new->next = NULL;
-	new->key = get_envk(envv);
-	new->value = splitenv(env, 2);
-	if (!new->value || !new->key)
-		return (free(new->key), free(new->value), free(new), NULL);
-	if (*head == NULL)
-		*head = new;
+	if (!set_env_value(new, envv))
+		return (free(new), (void)0);
+	if (*envl == NULL)
+		*envl = new;
 	else
 	{
-		temp = *head;
+		temp = *envl;
 		while (temp->next)
 			temp = temp->next;
 		temp->next = new;
@@ -65,9 +85,11 @@ void	ft_export(t_cmd *cmd, t_shell *shell)
 		while (args[++i])
 		{
 			if (is_alpha(args[i][0]) || args[i][0] == '_')
-			{
 				env_export(shell->envl, args[i])
-			}
+			else
+				printf("minishell : export: `%s': not a valid identifier", args[i]); // A REVOIR JE CONNAIS PAS LES CODES ERROR/EXIT
 		}
 	}
+	else
+		print_env(*env, shell->envl)
 }

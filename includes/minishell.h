@@ -6,7 +6,7 @@
 /*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:38:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/09 04:37:15 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/09 16:57:50 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int		is_built_ins(char *line);
 int		*open_pipes(int n_cmds);
 int		count_cmds(t_cmd *cmd);
 void	free_cmd(t_cmd *cmd);
+int		find_feq(char *s);
 t_cmd	*new_cmd(void);
 
 #endif
