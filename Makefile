@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 11:19:10 by nmeunier          #+#    #+#              #
-#    Updated: 2026/08/08 14:53:41 by nmeunier         ###   ########.fr        #
+#    Updated: 2026/08/09 03:58:09 by akkolitozer      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,13 +27,13 @@ LIBFT = libft/ft_lstadd_back.c libft/ft_lstadd_front.c libft/ft_lstdelone.c \
 		libft/ft_garbage.c libft/ft_ft_split.c libft/ft_strnjoin.c\
 
 SRCS = $(LIBFT) src/main.c src/lexer/lexer.c src/lexer/fill_lexer.c \
-				src/free/free.c src/parser/parser.c src/parser/env_list.c \
+				src/free/free.c src/parser/parser.c src/expander/env_list.c \
+				src/expander/expander.c  src/expander/env_array.c\
 				src/parser/fill_parser.c src/exec/setup_exec.c\
-				src/expander/expander.c  src/exec/env_array.c\
+				src/builtins/builtins.c src/builtins/echo.c \
 				src/exec/pipe_exec.c src/parser/is_type.c \
 				src/exec/exec_cmd.c src/exec/here_doc.c \
 				src/exec/set_std.c src/exec/get_path.c \
-				src/builtins/builtins.c src/builtins/echo.c
 
 CC = cc
 RM = rm -f

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:38:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/08 14:53:31 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/09 04:37:15 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	set_last_joined(t_token *tokens, char *line, int i);
 int		clean_all(pid_t *pids, int *pipes, int n_cmds);
 void	handle_heredoc(t_cmd *cmd, t_token *token);
 t_cmd	*parser(t_token *tokens, t_shell *shell);
+t_env	*env_new_node(t_env **head, char *env);
 char	*get_path(char *cmd_name, char **env);
 void	execution(t_cmd *cmd, t_shell *shell);
 void	expander(char **word, t_shell *shell);

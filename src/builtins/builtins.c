@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 13:14:58 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/08 15:45:46 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/09 04:01:47 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,16 @@ void	exec_built_ins(t_cmd *cmd, t_shell *shell, int code)
 {
 	if (code == 0)
 		ft_echo(cmd, shell);
-/*	if (code == 1)
-		ft_cd(cmd, shell);
-	if (code == 2)
-		ft_pwd(cmd, shell);
+	//if (code == 1)
+	//	ft_cd(cmd, shell);
+	//if (code == 2)
+	//	ft_pwd(cmd, shell);
 	if (code == 3)
 		ft_export(cmd, shell);
-	if (code == 4)
-		ft_unset(cmd, shell);
-	if (code == 5)
-		ft_env(cmd, shell);
-	if (code == 6)
-		ft_exit(cmd, shell); */
+	//if (code == 4)
+	//	ft_unset(cmd, shell);
+	//if (code == 5)
+	//	ft_env(cmd, shell);
+	//if (code == 6)
+	//	ft_exit(cmd, shell);
 }
