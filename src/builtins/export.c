@@ -6,7 +6,7 @@
 /*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 04:02:04 by akkolitozer       #+#    #+#             */
-/*   Updated: 2026/08/09 19:19:04 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/09 21:10:06 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	print_env(t_env **envl)
 {
+	t_env	*tmp;
 	
 }
 
