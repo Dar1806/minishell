@@ -6,11 +6,12 @@
 #    By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 11:19:10 by nmeunier          #+#    #+#              #
-#    Updated: 2026/08/09 03:58:09 by akkolitozer      ###   ########.fr        #
+#    Updated: 2026/08/10 03:41:10 by akkolitozer      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 LIBFT = libft/ft_lstadd_back.c libft/ft_lstadd_front.c libft/ft_lstdelone.c \
+		libft/ft_strdup.c libft/ft_strchr.c libft/ft_split.c libft/ft_strcmp.c\
 		libft/ft_strlen.c libft/ft_itoa.c libft/ft_bzero.c libft/ft_atoi.c\
 		libft/ft_putnbr_fd.c libft/ft_putchar_fd.c libft/ft_putendl_fd.c \
 		libft/ft_putstr_fd.c libft/ft_strrchr.c libft/ft_toupper.c \
@@ -23,7 +24,6 @@ LIBFT = libft/ft_lstadd_back.c libft/ft_lstadd_front.c libft/ft_lstdelone.c \
 		libft/ft_isalpha.c libft/ft_isascii.c libft/ft_memchr.c \
 		libft/ft_memmove.c libft/ft_memset.c libft/ft_substr.c \
 		libft/ft_calloc.c libft/ft_memcmp.c libft/ft_memcpy.c \
-		libft/ft_strdup.c libft/ft_strchr.c libft/ft_split.c \
 		libft/ft_garbage.c libft/ft_ft_split.c libft/ft_strnjoin.c\
 
 SRCS = $(LIBFT) src/main.c src/lexer/lexer.c src/lexer/fill_lexer.c \
@@ -31,6 +31,7 @@ SRCS = $(LIBFT) src/main.c src/lexer/lexer.c src/lexer/fill_lexer.c \
 				src/expander/expander.c  src/expander/env_array.c\
 				src/parser/fill_parser.c src/exec/setup_exec.c\
 				src/builtins/builtins.c src/builtins/echo.c \
+				src/builtins/export.c src/builtins/export2.c \
 				src/exec/pipe_exec.c src/parser/is_type.c \
 				src/exec/exec_cmd.c src/exec/here_doc.c \
 				src/exec/set_std.c src/exec/get_path.c \

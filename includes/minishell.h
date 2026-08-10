@@ -6,7 +6,7 @@
 /*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:38:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/09 16:57:50 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/10 02:52:42 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ t_env	*env_new_node(t_env **head, char *env);
 char	*get_path(char *cmd_name, char **env);
 void	execution(t_cmd *cmd, t_shell *shell);
 void	expander(char **word, t_shell *shell);
+void	ft_export(t_cmd *cmd, t_shell *shell);
 void	ft_echo(t_cmd *cmd, t_shell *shell);
 t_token	*lexer(char *line, t_shell *shell);
 void	close_all(int *pipes, int n_cmds);
@@ -98,6 +99,7 @@ t_env	*env_init_list(char **env);
 void	env_free_list(t_env *head);
 int		is_built_ins(char *line);
 int		*open_pipes(int n_cmds);
+void	env_print(t_env **envl);
 int		count_cmds(t_cmd *cmd);
 void	free_cmd(t_cmd *cmd);
 int		find_feq(char *s);
