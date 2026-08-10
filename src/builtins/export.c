@@ -6,7 +6,7 @@
 /*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 04:02:04 by akkolitozer       #+#    #+#             */
-/*   Updated: 2026/08/10 03:54:08 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/10 04:06:36 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	ft_export(t_cmd *cmd, t_shell *shell)
 	{
 		while (args[++i])
 		{
-			if (ft_isalpha(args[i][0]) || args[i][0] == '_')
+			if (is_valid_key(args[i]))
 				env_export(&shell->envl, args[i]);
 			else
 			{

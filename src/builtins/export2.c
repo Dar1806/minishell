@@ -6,11 +6,24 @@
 /*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 21:10:56 by akkolitozer       #+#    #+#             */
-/*   Updated: 2026/08/10 03:41:30 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/10 04:05:40 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	is_valid_key(char *str)
+{
+	int	i;
+	
+	i = 0;
+	if (!(ft_isalpha(str[0]) || str[0] == '_'))
+		return (0);
+	while (str[++i] && str[i] != '=')
+		if (!(ft_isalnum(str[i]) || str[i] == '_'))
+			return (0);
+	return (1);
+}
 
 int	envl_size(t_env **envl)
 {

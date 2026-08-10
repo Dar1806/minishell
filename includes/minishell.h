@@ -6,7 +6,7 @@
 /*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:38:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/10 02:52:42 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/10 04:05:54 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	free_tokens(t_token *tokens);
 t_env	*env_init_list(char **env);
 void	env_free_list(t_env *head);
 int		is_built_ins(char *line);
+int		is_valid_key(char *str);
 int		*open_pipes(int n_cmds);
 void	env_print(t_env **envl);
 int		count_cmds(t_cmd *cmd);
