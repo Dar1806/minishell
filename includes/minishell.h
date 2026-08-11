@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:38:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/10 04:05:54 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/11 15:38:12 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int		choose_tokens(t_token **tokens, char *line, int *i, t_shell *shell);
 void	run_child(t_cmd *cmd, t_shell *shell, int *pipes, int n_cmds);
 void	add_token(t_token **tokens, t_token_type type, char *value);
 t_token	*fill_cmd(t_cmd *cmd, t_token *cursor, int *parse_error);
-void 	exec_built_ins(t_cmd *cmd, t_shell *shell, int code);
+void	exec_built_ins(t_cmd *cmd, t_shell *shell, int code);
 void	set_last_joined(t_token *tokens, char *line, int i);
 int		clean_all(pid_t *pids, int *pipes, int n_cmds);
 void	handle_heredoc(t_cmd *cmd, t_token *token);

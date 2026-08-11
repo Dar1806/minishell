@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_std.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 15:17:03 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/05 23:26:31 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/11 15:54:27 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	run_child(t_cmd *cmd, t_shell *shell, int *pipes, int n_cmds)
 {
 	int	in_err;
 	int	out_err;
+	int	code;
 
 	close_all(pipes, n_cmds);
 	in_err = set_stdin(cmd);
@@ -92,5 +93,11 @@ void	run_child(t_cmd *cmd, t_shell *shell, int *pipes, int n_cmds)
 		exit(1);
 	if (!cmd->args || !cmd->args[0])
 		exit(0);
+	code = is_built_ins(cmd->args[0]);
+	if (code != -1)
+	{
+		exec_built_ins(cmd, shell, code);
+		exit(shell->ex_status);
+	}
 	exec_cmd(cmd, shell->env);
 }

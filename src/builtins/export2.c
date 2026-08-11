@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 21:10:56 by akkolitozer       #+#    #+#             */
-/*   Updated: 2026/08/10 04:09:01 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/11 15:40:04 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	is_valid_key(char *str)
 {
 	int	i;
-	
+
 	i = 0;
 	if (!(ft_isalpha(str[0]) || str[0] == '_'))
 		return (0);
@@ -29,7 +29,7 @@ int	envl_size(t_env **envl)
 {
 	t_env	*tmp;
 	int		i;
-	
+
 	tmp = *envl;
 	i = 1;
 	if (!tmp)
@@ -63,7 +63,7 @@ void	envl_sort(t_env **envl)
 	int		s;
 	int		i;
 	int		j;
-	
+
 	s = envl_size(envl);
 	i = -1;
 	while (++i < s - 1)
@@ -74,14 +74,14 @@ void	envl_sort(t_env **envl)
 		{
 			envl_switch(envt, envt->next);
 			envt = envt->next;
-		}		
+		}
 	}
 }
 
 void	env_print(t_env **envl)
 {
 	t_env	*tmp;
-	
+
 	envl_sort(envl);
 	tmp = *envl;
 	while (tmp)

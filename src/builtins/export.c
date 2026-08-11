@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 04:02:04 by akkolitozer       #+#    #+#             */
-/*   Updated: 2026/08/10 04:06:36 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/11 15:39:28 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ t_env	*find_existing_key(t_env *envl, char *key)
 {
 	while (envl)
 	{
-		if (!ft_strncmp(envl->key, key, ft_strlen(key)) 
-				&& ft_strlen(key) == ft_strlen(envl->key))
+		if (!ft_strncmp(envl->key, key, ft_strlen(key))
+			&& ft_strlen(key) == ft_strlen(envl->key))
 			return (envl);
 		envl = envl->next;
 	}
@@ -29,7 +29,7 @@ char	*get_envk(char *str)
 	int		i;
 	char	*key;
 	char	*old;
-	
+
 	i = -1;
 	key = ft_strdup("");
 	while (str[++i] && str[i] != '=')
@@ -49,7 +49,7 @@ int	set_env_value(t_env *new, char *envv)
 		free(new->value);
 	new->key = get_envk(envv);
 	if (!new->key)
-    	return (0);
+		return (0);
 	if (find_feq(envv))
 	{
 		if (!(find_feq(envv) == ft_strlen(envv)))
