@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+         #
+#    By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 11:19:10 by nmeunier          #+#    #+#              #
-#    Updated: 2026/08/10 03:41:10 by akkolitozer      ###   ########.fr        #
+#    Updated: 2026/08/14 12:17:16 by nmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRCS = $(LIBFT) src/main.c src/lexer/lexer.c src/lexer/fill_lexer.c \
 				src/exec/pipe_exec.c src/parser/is_type.c \
 				src/exec/exec_cmd.c src/exec/here_doc.c \
 				src/exec/set_std.c src/exec/get_path.c \
+				src/builtins/cd.c
 
 CC = cc
 RM = rm -f

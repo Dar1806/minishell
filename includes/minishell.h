@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:38:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/11 15:38:12 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/14 20:32:34 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <errno.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <string.h>
 # include "libft.h"
 
 typedef enum e_token_type
@@ -45,6 +46,7 @@ typedef struct s_token
 	t_token_type			type;
 }	t_token;
 
+/*STRUCT VARIABLE D'ENVIRONNEMENT*/
 typedef struct s_env
 {
 	char			*key;
@@ -85,8 +87,10 @@ char	*get_path(char *cmd_name, char **env);
 void	execution(t_cmd *cmd, t_shell *shell);
 void	expander(char **word, t_shell *shell);
 void	ft_export(t_cmd *cmd, t_shell *shell);
+void	env_export(t_env **envl, char *envv);
 void	ft_echo(t_cmd *cmd, t_shell *shell);
 t_token	*lexer(char *line, t_shell *shell);
+void	ft_cd(t_cmd *cmd, t_shell *shell);
 void	close_all(int *pipes, int n_cmds);
 char	*get_envv(t_env *envl, char *key);
 void	exec_cmd(t_cmd *cmd, char **env);
