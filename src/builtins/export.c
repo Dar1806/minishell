@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 04:02:04 by akkolitozer       #+#    #+#             */
-/*   Updated: 2026/08/16 18:50:32 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/16 19:07:42 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	ft_export(t_cmd *cmd, t_shell *shell)
 			ft_putstr_fd("minishell : export: `", 2);
 			ft_putstr_fd(args[i], 2);
 			ft_putendl_fd("': not a valid identifier", 2);
-			shell->ex_status = 1;		
+			shell->ex_status = 1;
 		}
 	}
 }
