@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 15:17:03 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/11 15:54:27 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/16 18:31:27 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,10 @@ static int	set_stdout(t_cmd *cmd)
 
 void	run_child(t_cmd *cmd, t_shell *shell, int *pipes, int n_cmds)
 {
-	int	in_err;
-	int	out_err;
-	int	code;
+	int		out_err;
+	int		in_err;
+	char	**envl;
+	int		code;
 
 	close_all(pipes, n_cmds);
 	in_err = set_stdin(cmd);
@@ -99,5 +100,6 @@ void	run_child(t_cmd *cmd, t_shell *shell, int *pipes, int n_cmds)
 		exec_built_ins(cmd, shell, code);
 		exit(shell->ex_status);
 	}
-	exec_cmd(cmd, shell->env);
+	envl = env_list_to_array(shell->envl);
+	exec_cmd(cmd, envl);
 }

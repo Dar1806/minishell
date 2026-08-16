@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:38:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/14 20:32:34 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/16 18:16:33 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,14 @@ char	*get_path(char *cmd_name, char **env);
 void	execution(t_cmd *cmd, t_shell *shell);
 void	expander(char **word, t_shell *shell);
 void	ft_export(t_cmd *cmd, t_shell *shell);
+void	ft_unset(t_cmd *cmd, t_shell *shell);
 void	env_export(t_env **envl, char *envv);
 void	ft_echo(t_cmd *cmd, t_shell *shell);
 t_token	*lexer(char *line, t_shell *shell);
 void	ft_cd(t_cmd *cmd, t_shell *shell);
 void	close_all(int *pipes, int n_cmds);
 char	*get_envv(t_env *envl, char *key);
+char	**env_list_to_array(t_env *envl);
 void	exec_cmd(t_cmd *cmd, char **env);
 int		is_redir_type(t_token_type type);
 int		write_read(char *file, int mode);
@@ -106,8 +108,8 @@ int		is_valid_key(char *str);
 int		*open_pipes(int n_cmds);
 void	env_print(t_env **envl);
 int		count_cmds(t_cmd *cmd);
+void	ft_pwd(t_shell *shell);
 void	free_cmd(t_cmd *cmd);
 int		find_feq(char *s);
 t_cmd	*new_cmd(void);
-
 #endif

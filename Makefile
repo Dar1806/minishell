@@ -6,7 +6,7 @@
 #    By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 11:19:10 by nmeunier          #+#    #+#              #
-#    Updated: 2026/08/14 12:17:16 by nmeunier         ###   ########.fr        #
+#    Updated: 2026/08/16 17:57:23 by nmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ SRCS = $(LIBFT) src/main.c src/lexer/lexer.c src/lexer/fill_lexer.c \
 				src/exec/pipe_exec.c src/parser/is_type.c \
 				src/exec/exec_cmd.c src/exec/here_doc.c \
 				src/exec/set_std.c src/exec/get_path.c \
-				src/builtins/cd.c
+				src/builtins/cd.c src/builtins/pwd.c \
+				src/builtins/unset.c
 
 CC = cc
 RM = rm -f

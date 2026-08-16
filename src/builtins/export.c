@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 04:02:04 by akkolitozer       #+#    #+#             */
-/*   Updated: 2026/08/14 11:51:46 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/16 18:50:32 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,20 +97,23 @@ void	ft_export(t_cmd *cmd, t_shell *shell)
 
 	args = cmd->args;
 	i = 0;
-	if (args[i + 1])
+	if (!args[i + 1])
 	{
-		while (args[++i])
+		env_print(&shell->envl);
+		shell->ex_status = 0;
+		return ;
+	}
+	shell->ex_status = 0;
+	while (args[++i])
+	{
+		if (is_valid_key(args[i]))
+			env_export(&shell->envl, args[i]);
+		else
 		{
-			if (is_valid_key(args[i]))
-				env_export(&shell->envl, args[i]);
-			else
-			{
-				ft_putstr_fd("minishell : export: `", 2);
-				ft_putstr_fd(args[i], 2);
-				ft_putendl_fd("': not a valid identifier", 2);
-			}
+			ft_putstr_fd("minishell : export: `", 2);
+			ft_putstr_fd(args[i], 2);
+			ft_putendl_fd("': not a valid identifier", 2);
+			shell->ex_status = 1;		
 		}
 	}
-	else
-		env_print(&shell->envl);
 }

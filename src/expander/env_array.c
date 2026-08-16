@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 23:19:15 by akkolitozer       #+#    #+#             */
-/*   Updated: 2026/08/08 13:07:51 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/16 18:53:56 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,28 +50,40 @@ void	free_errorj(char **enva)
 	free(enva);
 }
 
+int	add_env_to_array(char **enva, t_env *envl, int i)
+{
+	char	*tmp;
+
+	tmp = ft_strjoin(envl->key, "=");
+	if (!tmp)
+		return (0);
+	enva[i] = ft_strjoin(tmp, envl->value);
+	free(tmp);
+	if (!enva[i])
+		return (0);
+	return (1);
+}
+
 char	**env_list_to_array(t_env *envl)
 {
 	char	**enva;
-	char	*tmp;
 	int		lsize;
 	int		i;
 
-	i = -1;
+	i = 0;
 	lsize = env_size(envl);
 	enva = malloc((lsize + 1) * sizeof(char *));
 	if (!enva)
 		return (NULL);
-	while (++i < lsize)
+	while (envl)
 	{
-		tmp = ft_strjoin(envl->key, "=");
-		if (!tmp)
-			return (free_errorj(enva), NULL);
-		enva[i] = ft_strjoin(tmp, envl->value);
-		if (!enva[i])
-			return (free_errorj(enva), NULL);
+		if (envl->value)
+		{
+			if (!add_env_to_array(enva, envl, i))
+				return (free_errorj(enva), NULL);
+			i++;
+		}
 		envl = envl->next;
-		free(tmp);
 	}
 	enva[i] = NULL;
 	return (enva);

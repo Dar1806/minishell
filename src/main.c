@@ -6,17 +6,34 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:47:21 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/08 13:27:30 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/16 16:57:46 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int	routine(t_shell *shell)
+{
+	t_token	*tokens;
+	char	*line;
+	t_cmd	*cmd;
+
+	line = readline("minishell$ ");
+	if (!line)
+		return (0);
+	if (line[0])
+		add_history(line);
+	tokens = lexer(line, shell);
+	cmd = parser(tokens, shell);
+	execution(cmd, shell);
+	free_tokens(tokens);
+	free_cmd(cmd);
+	free(line);
+	return (1);
+}
+
 int	main(int ac, char **av, char **env)
 {
-	char	*line;
-	t_token	*tokens;
-	t_cmd	*cmd;
 	t_shell	shell;
 
 	shell.envl = env_init_list(env);
@@ -25,19 +42,8 @@ int	main(int ac, char **av, char **env)
 	shell.env = env;
 	shell.ex_status = 0;
 	while (1)
-	{
-		line = readline("minishell$ ");
-		if (!line)
+		if (!routine(&shell))
 			break ;
-		if (line[0])
-			add_history(line);
-		tokens = lexer(line, &shell);
-		cmd = parser(tokens, &shell);
-		execution(cmd, &shell);
-		free_tokens(tokens);
-		free_cmd(cmd);
-		free(line);
-	}
 	rl_clear_history();
 	env_free_list(shell.envl);
 	return ((void)av, shell.ex_status);

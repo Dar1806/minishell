@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 13:14:58 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/14 11:47:58 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/16 17:23:59 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ void	exec_built_ins(t_cmd *cmd, t_shell *shell, int code)
 		ft_echo(cmd, shell);
 	if (code == 1)
 		ft_cd(cmd, shell);
-	//if (code == 2)
-	//	ft_pwd(cmd, shell);
+	if (code == 2)
+		ft_pwd(shell);
 	if (code == 3)
 		ft_export(cmd, shell);
-	//if (code == 4)
-	//	ft_unset(cmd, shell);
+	if (code == 4)
+		ft_unset(cmd, shell);
 	//if (code == 5)
 	//	ft_env(cmd, shell);
 	//if (code == 6)

@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 14:52:09 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/08 13:11:06 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/16 17:03:53 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static int	choose_quote(t_token **tokens, char *line, int *i, t_shell *shell)
 	if (!line[j])
 	{
 		ft_putstr_fd("minishell: EOF while looking for matching quote\n", 2);
+		shell->ex_status = 2;
 		return (-1);
 	}
 	str = ft_substr(line, (*i) + 1, j - *i - 1);
@@ -117,7 +118,7 @@ int	choose_tokens(t_token **tokens, char *line, int *i, t_shell *shell)
 		(*i)++;
 	}
 	else if (line[*i] == '&')
-		return (ft_putstr_fd("minishell: syntax error"
+		return (shell->ex_status = 2, ft_putstr_fd("minishell: syntax error"
 				" near unexpected token `&&'\n", 2), -1);
 	else if (line[*i] == '\'' || line[*i] == '"')
 		return (handle_quote_token(tokens, line, i, shell));
