@@ -3,21 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   export3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/17 18:16:32 by hulescur          #+#    #+#             */
-/*   Updated: 2026/08/17 18:36:21 by hulescur         ###   ########.fr       */
+/*   Updated: 2026/08/18 00:26:17 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	env_free_nodes(t_env *head)
+{
+	t_env	*tmp;
+
+	while (head)
+	{
+		tmp = head->next;
+		free(head);
+		head = tmp;
+	}
+}
 
 t_env	*ft_expnew(t_env **dup, t_env *envl)
 {
 	t_env	*tmp;
 	t_env	*new;
 
-	new = malloc(sizeof(t_env));
+	new = ft_calloc(sizeof(t_env), 1);
 	if (!new)
 		return (NULL);
 	new->key = envl->key;

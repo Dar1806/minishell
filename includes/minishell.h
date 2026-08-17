@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:38:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/17 18:37:39 by hulescur         ###   ########.fr       */
+/*   Updated: 2026/08/18 01:15:08 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	expander(char **word, t_shell *shell);
 void	ft_export(t_cmd *cmd, t_shell *shell);
 void	ft_unset(t_cmd *cmd, t_shell *shell);
 void	env_export(t_env **envl, char *envv);
+void	ft_exit(t_cmd *cmd, t_shell *shell);
 void	ft_echo(t_cmd *cmd, t_shell *shell);
 t_token	*lexer(char *line, t_shell *shell);
 void	ft_cd(t_cmd *cmd, t_shell *shell);
@@ -101,6 +102,7 @@ int		write_read(char *file, int mode);
 int		is_word_type(t_token_type type);
 int		exec_here_doc(char *limiter);
 void	free_tokens(t_token *tokens);
+void	env_free_nodes(t_env *head);
 t_env	*env_init_list(char **env);
 void	env_free_list(t_env *head);
 t_env	*ft_expdup(t_env **envl);

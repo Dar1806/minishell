@@ -6,7 +6,7 @@
 /*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 11:26:13 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/10 03:37:59 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/18 01:15:50 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <stdlib.h>
 # include <stddef.h>
 # include <string.h>
+
+# define INT_MAX 2147483647
+# define INT_MIN -2147483648
 
 typedef struct s_list
 {
@@ -49,6 +52,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 void	ft_lstadd_back(t_list **lst, t_list *new);
 int		ft_strcmp(const char *s1, const char *s2);
 void	*ft_ft_calloc(size_t nmemb, size_t size);
+int		ft_atoi(const char *nb, int *error);
 void	*ft_calloc(size_t nmemb, size_t size);
 void	*ft_memset(void *s, int c, size_t n);
 char	**ft_ft_split(char const *s, char c);
@@ -65,7 +69,6 @@ int		ft_strlen(const char *str);
 char	*ft_strdup(const char *s);
 t_list	*ft_lstnew(void *content);
 t_list	*ft_lstlast(t_list *lst);
-int		ft_atoi(const char *str);
 int		ft_lstsize(t_list *lst);
 void	*ft_malloc(int size);
 char	*ft_ft_itoa(int n);

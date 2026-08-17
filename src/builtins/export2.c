@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 21:10:56 by akkolitozer       #+#    #+#             */
-/*   Updated: 2026/08/17 18:47:22 by hulescur         ###   ########.fr       */
+/*   Updated: 2026/08/18 00:28:00 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,10 @@ void	envl_sort(t_env **envl)
 void	env_print(t_env **envl)
 {
 	t_env	*tmp;
+	t_env	*head;
 
 	tmp = ft_expdup(envl);
+	head = tmp;
 	envl_sort(&tmp);
 	while (tmp)
 	{
@@ -98,4 +100,5 @@ void	env_print(t_env **envl)
 			ft_putchar_fd('\n', 1);
 		tmp = tmp->next;
 	}
+	env_free_nodes(head);
 }

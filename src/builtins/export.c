@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 04:02:04 by akkolitozer       #+#    #+#             */
-/*   Updated: 2026/08/17 18:08:16 by hulescur         ###   ########.fr       */
+/*   Updated: 2026/08/18 00:19:23 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	set_env_value(t_env *new, char *envv)
 			new->value = ft_strdup("");
 	}
 	else
-		new->value = NULL;
+		new->value = ft_strdup("");
 	return (1);
 }
 
