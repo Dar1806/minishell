@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 21:10:56 by akkolitozer       #+#    #+#             */
-/*   Updated: 2026/08/11 15:40:04 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/17 18:47:22 by hulescur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,11 @@ void	env_print(t_env **envl)
 {
 	t_env	*tmp;
 
-	envl_sort(envl);
-	tmp = *envl;
+	tmp = ft_expdup(envl);
+	envl_sort(&tmp);
 	while (tmp)
 	{
-		ft_putstr_fd("declare -x ", 1);
+		ft_putstr_fd("export ", 1);
 		ft_putstr_fd(tmp->key, 1);
 		if (tmp->value)
 		{

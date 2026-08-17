@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 13:14:58 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/16 17:23:59 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/17 15:14:13 by hulescur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	exec_built_ins(t_cmd *cmd, t_shell *shell, int code)
 		ft_export(cmd, shell);
 	if (code == 4)
 		ft_unset(cmd, shell);
-	//if (code == 5)
-	//	ft_env(cmd, shell);
+	if (code == 5)
+		ft_env(shell->envl);
 	//if (code == 6)
 	//	ft_exit(cmd, shell);
 }

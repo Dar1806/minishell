@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:38:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/16 18:16:33 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/17 18:37:39 by hulescur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ int		exec_here_doc(char *limiter);
 void	free_tokens(t_token *tokens);
 t_env	*env_init_list(char **env);
 void	env_free_list(t_env *head);
+t_env	*ft_expdup(t_env **envl);
 int		is_built_ins(char *line);
 int		is_valid_key(char *str);
 int		*open_pipes(int n_cmds);
@@ -110,6 +111,7 @@ void	env_print(t_env **envl);
 int		count_cmds(t_cmd *cmd);
 void	ft_pwd(t_shell *shell);
 void	free_cmd(t_cmd *cmd);
+void	ft_env(t_env *envl);
 int		find_feq(char *s);
 t_cmd	*new_cmd(void);
 #endif
