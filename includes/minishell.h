@@ -6,7 +6,7 @@
 /*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:38:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/18 01:15:08 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/18 02:46:35 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdio.h>
 # include <sys/types.h>
+# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/wait.h>
