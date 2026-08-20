@@ -6,7 +6,7 @@
 /*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:47:21 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/20 22:00:57 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/20 22:16:59 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main(int ac, char **av, char **env)
 	t_shell				shell;
 	
 	sigint_setup();
+	sigquit_ignore();
 	shell.envl = env_init_list(env);
 	if (ac != 1)
 		return (ft_putstr_fd("Error : No arguments needed", 2), 1);

@@ -6,7 +6,7 @@
 /*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:38:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/20 21:59:58 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/20 22:16:51 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ void	env_print(t_env **envl);
 int		count_cmds(t_cmd *cmd);
 void	ft_pwd(t_shell *shell);
 void	free_cmd(t_cmd *cmd);
+void	sigquit_ignore(void);
 void	sigint_ignore(void);
 void	ft_env(t_env *envl);
 void	sigint_setup(void);

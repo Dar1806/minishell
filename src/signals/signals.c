@@ -6,7 +6,7 @@
 /*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/18 02:45:34 by akkolitozer       #+#    #+#             */
-/*   Updated: 2026/08/20 22:06:01 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/20 22:16:15 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,16 @@ void	sigint_ignore(void)
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
 	sigaction(SIGINT, &sa, NULL);
+}
+
+void	sigquit_ignore(void)
+{
+	struct sigaction	sa;
+
+	sa.sa_handler = SIG_IGN;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	sigaction(SIGQUIT, &sa, NULL);
 }
 
 void	handle_sigint(int sig)

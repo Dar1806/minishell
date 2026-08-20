@@ -6,7 +6,7 @@
 /*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 14:36:20 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/20 22:04:12 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/20 22:21:03 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,11 @@ static void	simple_exec(t_cmd *cmd, t_shell *shell)
 	if (WIFEXITED(status))
 		shell->ex_status = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
+	{
 		shell->ex_status = (128 + WTERMSIG(status));
+		if (WTERMSIG(status) == SIGQUIT)
+			ft_putendl_fd("Quit (core dumped)", 1);
+	}
 }
 
 static int	*setup_pipes(int *pipes, int i, int n_cmds)

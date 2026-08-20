@@ -6,7 +6,7 @@
 /*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 16:33:25 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/05 23:26:31 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/20 22:25:08 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,11 @@ static int	wait_all(pid_t *pids, int n_cmds)
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
 	else if (WIFSIGNALED(status))
+	{
+		if (WTERMSIG(status) == SIGQUIT)
+			ft_putendl_fd("Quit (core dumped)", 1);
 		return (128 + WTERMSIG(status));
+	}
 	return (0);
 }
 
