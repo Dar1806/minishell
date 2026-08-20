@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 14:36:20 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/11 15:42:47 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/20 22:04:12 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 static void	simple_exec(t_cmd *cmd, t_shell *shell)
 {
-	pid_t	pid;
-	int		status;
+	pid_t				pid;
+	int					status;
 
+	sigint_ignore();
 	pid = fork();
 	if (pid == -1)
 	{
@@ -26,6 +27,7 @@ static void	simple_exec(t_cmd *cmd, t_shell *shell)
 	if (pid == 0)
 		run_child(cmd, shell, NULL, 0);
 	waitpid(pid, &status, 0);
+	sigint_setup();
 	if (WIFEXITED(status))
 		shell->ex_status = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
@@ -56,16 +58,18 @@ void	pipe_exec(t_cmd *cmd, t_shell *shell)
 	if (!pipes)
 		return (free(pids));
 	i = -1;
+	sigint_ignore();
 	while (++i < n_cmds)
 	{
 		pids[i] = fork();
 		if (pids[i] == -1)
-			return (ft_putstr_fd("Error : fork failed\n", 2));
+			return (sigint_setup(), ft_putstr_fd("Error : fork failed\n", 2));
 		if (pids[i] == 0)
 			run_child(cmd, shell, setup_pipes(pipes, i, n_cmds), n_cmds);
 		cmd = cmd->next;
 	}
 	shell->ex_status = clean_all(pids, pipes, n_cmds);
+	sigint_setup();
 }
 
 void	execution(t_cmd *cmd, t_shell *shell)

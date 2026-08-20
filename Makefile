@@ -6,7 +6,7 @@
 #    By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 11:19:10 by nmeunier          #+#    #+#              #
-#    Updated: 2026/08/18 01:15:24 by akkolitozer      ###   ########.fr        #
+#    Updated: 2026/08/18 17:56:07 by akkolitozer      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ SRCS = $(LIBFT) src/main.c src/lexer/lexer.c src/lexer/fill_lexer.c \
 				src/exec/set_std.c src/exec/get_path.c \
 				src/builtins/cd.c src/builtins/pwd.c \
 				src/builtins/unset.c src/builtins/env.c \
-				src/builtins/export3.c src/builtins/exit.c
+				src/builtins/export3.c src/builtins/exit.c \
+				src/signals/signals.c
 
 CC = cc
 RM = rm -f

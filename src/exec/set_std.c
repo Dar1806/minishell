@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_std.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 15:17:03 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/16 18:31:27 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/20 21:38:36 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ void	run_child(t_cmd *cmd, t_shell *shell, int *pipes, int n_cmds)
 	char	**envl;
 	int		code;
 
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	close_all(pipes, n_cmds);
 	in_err = set_stdin(cmd);
 	out_err = set_stdout(cmd);

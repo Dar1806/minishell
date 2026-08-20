@@ -6,7 +6,7 @@
 /*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:38:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/18 02:46:35 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/20 21:59:58 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,12 +109,15 @@ void	env_free_list(t_env *head);
 t_env	*ft_expdup(t_env **envl);
 int		is_built_ins(char *line);
 int		is_valid_key(char *str);
+void	handle_sigint(int sig);
 int		*open_pipes(int n_cmds);
 void	env_print(t_env **envl);
 int		count_cmds(t_cmd *cmd);
 void	ft_pwd(t_shell *shell);
 void	free_cmd(t_cmd *cmd);
+void	sigint_ignore(void);
 void	ft_env(t_env *envl);
+void	sigint_setup(void);
 int		find_feq(char *s);
 t_cmd	*new_cmd(void);
 #endif
