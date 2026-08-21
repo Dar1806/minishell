@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/26 20:47:15 by hulescur          #+#    #+#             */
-/*   Updated: 2026/08/17 18:24:58 by hulescur         ###   ########.fr       */
+/*   Updated: 2026/08/21 17:57:09 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,13 +107,3 @@ t_env	*env_init_list(char **env)
 	}
 	return (head);
 }
-
-// int main(void)
-// {
-// 	char *env = "HOME=/home/toto";
-// 	char *key;
-// 	char *value;
-// 	key = splitenv(env, 1);
-// 	value = splitenv(env, 2);
-// 	printf("%s, %s", key, value);
-// }

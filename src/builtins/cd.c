@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/14 11:48:03 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/14 20:51:29 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/21 18:57:46 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	cd_home(t_shell *shell)
 	path = get_envv(shell->envl, "HOME");
 	if (path[0] == '\0')
 	{
-		free(path);
 		shell->ex_status = 1;
 		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
 		return ;
@@ -41,7 +40,6 @@ void	cd_home(t_shell *shell)
 	}
 	else
 		shell->ex_status = 0;
-	free(path);
 }
 
 void	cd_path(t_cmd *cmd, t_shell *shell)
@@ -64,14 +62,12 @@ void	update_pwd(t_shell *shell, char *old_pwd)
 	if (!new_pwd)
 		return ;
 	if (!old_pwd)
-		tmp = ft_strjoin("OLDPWD=", "");
+		tmp = ft_ft_strjoin("OLDPWD=", "");
 	else
-		tmp = ft_strjoin("OLDPWD=", old_pwd);
+		tmp = ft_ft_strjoin("OLDPWD=", old_pwd);
 	env_export(&shell->envl, tmp);
-	free(tmp);
-	tmp = ft_strjoin("PWD=", new_pwd);
+	tmp = ft_ft_strjoin("PWD=", new_pwd);
 	env_export(&shell->envl, tmp);
-	free(tmp);
 	free(new_pwd);
 }
 

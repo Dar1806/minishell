@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 14:36:20 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/20 22:21:03 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/21 19:03:51 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ void	pipe_exec(t_cmd *cmd, t_shell *shell)
 	int		i;
 
 	n_cmds = count_cmds(cmd);
-	pids = malloc(sizeof(pid_t) * n_cmds);
+	pids = ft_malloc(sizeof(pid_t) * n_cmds);
 	if (!pids)
 		return ;
 	pipes = open_pipes(n_cmds);
 	if (!pipes)
-		return (free(pids));
+		return ;
 	i = -1;
 	sigint_ignore();
 	while (++i < n_cmds)

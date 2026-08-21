@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:38:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/20 22:16:51 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/21 19:24:51 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ int		count_cmds(t_cmd *cmd);
 void	ft_pwd(t_shell *shell);
 void	free_cmd(t_cmd *cmd);
 void	sigquit_ignore(void);
+void	free_tab(char **tab);
 void	sigint_ignore(void);
 void	ft_env(t_env *envl);
 void	sigint_setup(void);

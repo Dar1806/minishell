@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 23:19:15 by akkolitozer       #+#    #+#             */
-/*   Updated: 2026/08/16 18:53:56 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/21 19:27:48 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ char	*get_envv(t_env *envl, char *key)
 	{
 		if (!ft_strncmp(curr->key, key, ft_strlen(key))
 			&& ft_strlen(key) == ft_strlen(curr->key))
-			return (ft_strdup(curr->value));
+			return (ft_ft_strdup(curr->value));
 		curr = curr->next;
 	}
-	return (ft_strdup(""));
+	return (ft_ft_strdup(""));
 }
 
 int	env_size(t_env *envl)
@@ -57,7 +57,7 @@ int	add_env_to_array(char **enva, t_env *envl, int i)
 	tmp = ft_strjoin(envl->key, "=");
 	if (!tmp)
 		return (0);
-	enva[i] = ft_strjoin(tmp, envl->value);
+	enva[i] = ft_ft_strjoin(tmp, envl->value);
 	free(tmp);
 	if (!enva[i])
 		return (0);
@@ -72,7 +72,7 @@ char	**env_list_to_array(t_env *envl)
 
 	i = 0;
 	lsize = env_size(envl);
-	enva = malloc((lsize + 1) * sizeof(char *));
+	enva = ft_malloc((lsize + 1) * sizeof(char *));
 	if (!enva)
 		return (NULL);
 	while (envl)

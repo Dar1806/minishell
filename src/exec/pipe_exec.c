@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 16:33:25 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/20 22:25:08 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/21 19:59:34 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	*open_pipes(int n_cmds)
 	int	*pipes;
 
 	i = 0;
-	pipes = malloc(sizeof(int) * (n_cmds - 1) * 2);
+	pipes = ft_malloc(sizeof(int) * (n_cmds - 1) * 2);
 	while (i < n_cmds - 1)
 	{
 		if (pipe(pipes + i * 2) == -1)
@@ -75,7 +75,5 @@ int	clean_all(pid_t *pids, int *pipes, int n_cmds)
 
 	close_all(pipes, n_cmds);
 	ex_status = wait_all(pids, n_cmds);
-	free(pipes);
-	free(pids);
 	return (ex_status);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 15:44:08 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/05 23:26:31 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/21 19:17:03 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	cmd_not_found(char *args)
 	if (args)
 		ft_putstr_fd(args, 2);
 	ft_putstr_fd(": command not found\n", 2);
+	ft_free();
 	exit(127);
 }
 
@@ -45,5 +46,6 @@ void	exec_cmd(t_cmd *cmd, char **env)
 	}
 	else
 		ft_putstr_fd("minishell: execve failed\n", 2);
+	ft_free();
 	exit(126);
 }

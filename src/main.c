@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:47:21 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/20 22:16:59 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/21 19:29:17 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ int	routine(t_shell *shell)
 	tokens = lexer(line, shell);
 	cmd = parser(tokens, shell);
 	execution(cmd, shell);
-	free_tokens(tokens);
-	free_cmd(cmd);
+	ft_free();
 	free(line);
 	return (1);
 }
@@ -35,7 +34,7 @@ int	routine(t_shell *shell)
 int	main(int ac, char **av, char **env)
 {
 	t_shell				shell;
-	
+
 	sigint_setup();
 	sigquit_ignore();
 	shell.envl = env_init_list(env);
@@ -44,9 +43,9 @@ int	main(int ac, char **av, char **env)
 	shell.env = env;
 	shell.ex_status = 0;
 	while (1)
-		if (!routine(&shell))
-			break ;
-	rl_clear_history();
+	if (!routine(&shell))
+		break ;
 	env_free_list(shell.envl);
+	rl_clear_history();
 	return ((void)av, shell.ex_status);
 }

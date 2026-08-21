@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 17:37:35 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/05 23:26:31 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/21 19:12:10 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static void	append_to_arg(t_cmd *cmd, int i, char *value)
 	char	*tmp;
 
 	if (!cmd->args[i])
-		cmd->args[i] = ft_strdup(value);
+		cmd->args[i] = ft_ft_strdup(value);
 	else
 	{
 		tmp = ft_strjoin(cmd->args[i], value);
-		free(cmd->args[i]);
+		// free(cmd->args[i]);
 		cmd->args[i] = tmp;
 	}
 }
@@ -83,13 +83,13 @@ static	int	handle_redir(t_cmd *cmd, t_token **token, int *parse_error)
 			fd = write_read(cmd->outfile, cmd->append + 1);
 			if (fd != -1)
 				close(fd);
-			free(cmd->outfile);
+			// free(cmd->outfile);
 		}
-		cmd->outfile = ft_strdup((*token)->value);
+		cmd->outfile = ft_ft_strdup((*token)->value);
 		cmd->append = (type == TOKEN_REDIR_APPEND);
 	}
 	else if (type == TOKEN_REDIR_IN)
-		cmd->infile = ft_strdup((*token)->value);
+		cmd->infile = ft_ft_strdup((*token)->value);
 	else if (type == TOKEN_HEREDOC)
 		handle_heredoc(cmd, *token);
 	return (0);
@@ -100,7 +100,7 @@ t_token	*fill_cmd(t_cmd *cmd, t_token *cursor, int *parse_error)
 	int	i;
 
 	i = 0;
-	cmd->args = ft_calloc(count_args(cursor) + 1, sizeof(char *));
+	cmd->args = ft_ft_calloc(count_args(cursor) + 1, sizeof(char *));
 	if (!cmd->args)
 		return (NULL);
 	while (cursor && cursor->type != TOKEN_PIPE)

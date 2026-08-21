@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 14:10:41 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/05 23:26:31 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/21 19:14:07 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_cmd	*new_cmd(void)
 {
 	t_cmd	*cmd;
 
-	cmd = malloc(sizeof(t_cmd));
+	cmd = ft_malloc(sizeof(t_cmd));
 	cmd->append = 0;
 	cmd->args = NULL;
 	cmd->here_doc = NULL;
@@ -59,13 +59,13 @@ t_cmd	*parser(t_token *tokens, t_shell *shell)
 	while (cursor)
 	{
 		if (cursor->type == TOKEN_PIPE)
-			return (syntax_error(shell), free_cmd(first), NULL);
+			return (syntax_error(shell), NULL);
 		cmd = new_cmd();
 		if (!cmd)
-			return (free_cmd(first), NULL);
+			return (NULL);
 		cursor = fill_cmd(cmd, cursor, &parse_error);
 		if (parse_error)
-			return (shell->ex_status = 2, free_cmd(cmd), free_cmd(first), NULL);
+			return (shell->ex_status = 2, NULL);
 		add_cmd(&first, &last, cmd);
 	}
 	return (first);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 15:25:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/05 23:26:31 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/21 19:02:38 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	handle_heredoc(t_cmd *cmd, t_token *token)
 		fd = exec_here_doc(cmd->here_doc);
 		if (fd != -1)
 			close(fd);
-		free(cmd->here_doc);
+		// free(cmd->here_doc);
 	}
-	cmd->here_doc = ft_strdup(token->value);
+	cmd->here_doc = ft_ft_strdup(token->value);
 }
 
 int	exec_here_doc(char *limiter)

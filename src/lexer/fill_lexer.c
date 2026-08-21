@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 14:52:09 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/16 17:03:53 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/21 20:02:17 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	choose_quote(t_token **tokens, char *line, int *i, t_shell *shell)
 		shell->ex_status = 2;
 		return (-1);
 	}
-	str = ft_substr(line, (*i) + 1, j - *i - 1);
+	str = ft_ft_substr(line, (*i) + 1, j - *i - 1);
 	if (type == TOKEN_DOUBLE_QUOTES)
 		expander(&str, shell);
 	add_token(tokens, type, str);
@@ -50,21 +50,21 @@ static void	choose_redir(t_token **tokens, char *line, int *i)
 	{
 		if (line[j + 1] == '>')
 		{
-			add_token(tokens, TOKEN_REDIR_APPEND, ft_strdup(">>"));
+			add_token(tokens, TOKEN_REDIR_APPEND, ft_ft_strdup(">>"));
 			j++;
 		}
 		else
-			add_token(tokens, TOKEN_REDIR_OUT, ft_strdup(">"));
+			add_token(tokens, TOKEN_REDIR_OUT, ft_ft_strdup(">"));
 	}
 	else if (line[j] == '<')
 	{
 		if (line[j + 1] == '<')
 		{
-			add_token(tokens, TOKEN_HEREDOC, ft_strdup("<<"));
+			add_token(tokens, TOKEN_HEREDOC, ft_ft_strdup("<<"));
 			j++;
 		}
 		else
-			add_token(tokens, TOKEN_REDIR_IN, ft_strdup("<"));
+			add_token(tokens, TOKEN_REDIR_IN, ft_ft_strdup("<"));
 	}
 	(*i) = j;
 }
@@ -84,12 +84,10 @@ static void	read_word(t_token **tokens, char *line, int *i, t_shell *shell)
 		(*i)++;
 		return ;
 	}
-	str = ft_substr(line, (*i), j - *i);
+	str = ft_ft_substr(line, (*i), j - *i);
 	expander(&str, shell);
 	if (str && str[0])
 		add_token(tokens, TOKEN_WORD, str);
-	else
-		free(str);
 	(*i) = j;
 }
 
@@ -109,7 +107,7 @@ int	choose_tokens(t_token **tokens, char *line, int *i, t_shell *shell)
 		(*i)++;
 	else if (line[*i] == '|')
 	{
-		add_token(tokens, TOKEN_PIPE, ft_strdup("|"));
+		add_token(tokens, TOKEN_PIPE, ft_ft_strdup("|"));
 		(*i)++;
 	}
 	else if (line[*i] == '>' || line[*i] == '<')

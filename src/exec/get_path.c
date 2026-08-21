@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 14:14:49 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/05 23:26:31 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/21 19:01:46 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,14 @@ char	*find_cmd_in_paths(char **path, char *cmd_name)
 	i = -1;
 	while (path[++i])
 	{
-		full_path = ft_strjoin(path[i], "/");
+		full_path = ft_ft_strjoin(path[i], "/");
 		if (!full_path)
 			return (NULL);
-		is_ok = ft_strjoin(full_path, cmd_name);
-		free(full_path);
+		is_ok = ft_ft_strjoin(full_path, cmd_name);
 		if (!is_ok)
 			return (NULL);
 		if (access(is_ok, F_OK | X_OK) == 0)
 			return (is_ok);
-		free(is_ok);
 	}
 	return (NULL);
 }
@@ -78,16 +76,15 @@ char	*get_path(char *cmd_name, char **env)
 	if (cmd_name[i] == '/')
 	{
 		if (access(cmd_name, F_OK | X_OK) == 0)
-			return (ft_strjoin(cmd_name, ""));
+			return (ft_ft_strjoin(cmd_name, ""));
 		return (NULL);
 	}
 	env_path = ft_getenv(env);
 	if (!env_path)
 		return (NULL);
-	path = ft_split(env_path, ':');
+	path = ft_ft_split(env_path, ':');
 	if (!path)
 		return (NULL);
 	result = find_cmd_in_paths(path, cmd_name);
-	free_tab(path);
 	return (result);
 }

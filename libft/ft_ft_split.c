@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ft_split.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 14:43:39 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/07/20 17:04:23 by hulescur         ###   ########.fr       */
+/*   Updated: 2026/08/21 18:54:50 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static char	*ft_ft_stock(const char *str, char c)
 static int	process(const char **str, char c, char **tab, int *j)
 {
 	char	*nvstr;
-	int		k;
+	// int		k;
 
 	while (**str && ft_isc(**str, c))
 		(*str)++;
@@ -74,10 +74,10 @@ static int	process(const char **str, char c, char **tab, int *j)
 	nvstr = ft_ft_stock(*str, c);
 	if (!nvstr)
 	{
-		k = 0;
-		while (k < *j)
-			free(tab[k++]);
-		free(tab);
+		// k = 0;
+		// while (k < *j)
+		// 	free(tab[k++]);
+		// free(tab);
 		return (-1);
 	}
 	tab[*j] = nvstr;

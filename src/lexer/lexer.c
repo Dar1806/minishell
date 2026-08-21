@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 12:24:07 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/06 01:23:42 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/21 19:11:53 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	add_token(t_token **tokens, t_token_type type, char *value)
 	t_token	*new;
 	t_token	*last;
 
-	new = malloc(sizeof(t_token));
+	new = ft_malloc(sizeof(t_token));
 	if (!new)
 		return ;
 	new->type = type;
@@ -63,7 +63,7 @@ t_token	*lexer(char *line, t_shell *shell)
 	{
 		if (choose_tokens(&tokens, line, &i, shell) == -1)
 		{
-			free_tokens(tokens);
+			// free_tokens(tokens);
 			return (NULL);
 		}
 	}
