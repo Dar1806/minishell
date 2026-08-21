@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:38:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/21 19:24:51 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/21 23:05:39 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	add_token(t_token **tokens, t_token_type type, char *value);
 t_token	*fill_cmd(t_cmd *cmd, t_token *cursor, int *parse_error);
 void	exec_built_ins(t_cmd *cmd, t_shell *shell, int code);
 void	set_last_joined(t_token *tokens, char *line, int i);
+void	exec_cmd(t_cmd *cmd, char **env, t_shell *shell);
 int		clean_all(pid_t *pids, int *pipes, int n_cmds);
 void	handle_heredoc(t_cmd *cmd, t_token *token);
 t_cmd	*parser(t_token *tokens, t_shell *shell);
@@ -97,7 +98,6 @@ void	ft_cd(t_cmd *cmd, t_shell *shell);
 void	close_all(int *pipes, int n_cmds);
 char	*get_envv(t_env *envl, char *key);
 char	**env_list_to_array(t_env *envl);
-void	exec_cmd(t_cmd *cmd, char **env);
 int		is_redir_type(t_token_type type);
 int		write_read(char *file, int mode);
 int		is_word_type(t_token_type type);
@@ -122,4 +122,5 @@ void	ft_env(t_env *envl);
 void	sigint_setup(void);
 int		find_feq(char *s);
 t_cmd	*new_cmd(void);
+
 #endif

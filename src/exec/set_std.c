@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 15:17:03 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/21 19:28:00 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/21 23:04:23 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,5 @@ void	run_child(t_cmd *cmd, t_shell *shell, int *pipes, int n_cmds)
 		exit(shell->ex_status);
 	}
 	envl = env_list_to_array(shell->envl);
-	exec_cmd(cmd, envl);
+	exec_cmd(cmd, envl, shell);
 }
