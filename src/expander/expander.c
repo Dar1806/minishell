@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/30 17:52:04 by hulescur          #+#    #+#             */
-/*   Updated: 2026/08/21 19:18:18 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/22 18:55:12 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ char	*get_var_key(char *word)
 	i = 0;
 	if (word[i] == '?')
 		return (ft_ft_strdup("?"));
-	while (word[i] && (ft_isalpha(word[i]) || (word[i] == '_'
-				|| (ft_isalnum(word[i] && i != 0)))))
+	while (word[i] && (ft_isalpha(word[i]) || word[i] == '_'
+			|| (ft_isdigit(word[i]) && i != 0)))
 		i++;
 	return (ft_ft_substr(word, 0, i));
 }
@@ -29,13 +29,11 @@ void	envv_handler(char *word, char **expanded, int *i, t_shell *shell)
 {
 	char	*key;
 	char	*value;
-	// char	*old;
 
 	(*i)++;
 	key = get_var_key(word + *i);
 	if (!key)
 		return ;
-	// old = *expanded;
 	if (word[*i] == '?')
 	{
 		value = ft_ft_itoa(shell->ex_status);
@@ -53,7 +51,6 @@ void	envv_handler(char *word, char **expanded, int *i, t_shell *shell)
 void	expander(char **word, t_shell *shell)
 {
 	char	*expanded;
-	// char	*old;
 	int		i;
 
 	i = 0;
@@ -69,10 +66,7 @@ void	expander(char **word, t_shell *shell)
 				envv_handler(*word, &expanded, &i, shell);
 		}
 		else
-		{
-			// old = expanded;
 			expanded = ft_ft_strnjoin(expanded, &(*word)[i++], 1);
-		}
 	}
 	*word = expanded;
 }

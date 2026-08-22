@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 01:33:16 by akkolitozer       #+#    #+#             */
-/*   Updated: 2026/08/21 19:55:55 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/22 19:21:08 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ char	*ft_strnjoin(char const *s1, char const *s2, int n)
 	new[i + j] = '\0';
 	return (new);
 }
-
 
 char	*ft_ft_strnjoin(char const *s1, char const *s2, int n)
 {

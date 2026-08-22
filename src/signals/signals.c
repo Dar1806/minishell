@@ -6,13 +6,13 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/18 02:45:34 by akkolitozer       #+#    #+#             */
-/*   Updated: 2026/08/21 17:50:48 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/22 19:37:17 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	g_signal;
+volatile sig_atomic_t	g_signal = 0;
 
 void	sigint_setup(void)
 {

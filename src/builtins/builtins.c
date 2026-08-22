@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 13:14:58 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/22 17:34:34 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/22 19:21:54 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	set_stdin_fd(t_cmd *cmd)
 {
+	cmd->fd_in = 0;
 	if (cmd->here_doc != NULL)
 	{
 		cmd->fd_in = exec_here_doc(cmd->here_doc);
@@ -31,6 +32,7 @@ int	set_stdin_fd(t_cmd *cmd)
 
 int	set_stdout_fd(t_cmd *cmd)
 {
+	cmd->fd_out = 1;
 	if (cmd->outfile)
 	{
 		if (cmd->append)
@@ -42,8 +44,6 @@ int	set_stdout_fd(t_cmd *cmd)
 	}
 	return (0);
 }
-
-
 
 int	is_built_ins(char *args)
 {
@@ -83,5 +83,9 @@ void	exec_built_ins(t_cmd *cmd, t_shell *shell, int code)
 		ft_env(cmd, shell->envl);
 	if (code == 6)
 		ft_exit(cmd, shell);
+	if (cmd->fd_in != 0)
+		close(cmd->fd_in);
+	if (cmd->fd_out != 1)
+		close(cmd->fd_out);
 	ft_free();
 }

@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 12:24:07 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/21 19:11:53 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/22 19:24:33 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,7 @@ t_token	*lexer(char *line, t_shell *shell)
 	tokens = NULL;
 	i = 0;
 	while (line[i])
-	{
 		if (choose_tokens(&tokens, line, &i, shell) == -1)
-		{
-			// free_tokens(tokens);
 			return (NULL);
-		}
-	}
 	return (tokens);
 }

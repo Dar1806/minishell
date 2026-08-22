@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:38:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/22 17:34:18 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/22 19:37:30 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # include <fcntl.h>
 # include <string.h>
 # include "libft.h"
+
+extern volatile sig_atomic_t	g_signal;
 
 typedef enum e_token_type
 {

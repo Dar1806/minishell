@@ -6,20 +6,18 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 14:46:22 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/22 17:31:42 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/22 19:20:15 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_newline(t_cmd *cmd)
+int	is_newline(char *args)
 {
 	int		i;
-	char	*args;
 
-	if (cmd->args[1] == NULL)
-		return (1);
-	args = cmd->args[1];
+	if (args == NULL)
+		return (0);
 	i = 0;
 	if (args[i] == '-')
 	{
@@ -28,13 +26,13 @@ int	is_newline(t_cmd *cmd)
 			while (args[i] == 'n')
 				i++;
 		else
-			return (1);
-		if (ft_strlen(args) == i)
 			return (0);
-		else
+		if (ft_strlen(args) == i)
 			return (1);
+		else
+			return (0);
 	}
-	return (1);
+	return (0);
 }
 
 void	ft_echo(t_cmd *cmd, t_shell *shell)
@@ -42,14 +40,11 @@ void	ft_echo(t_cmd *cmd, t_shell *shell)
 	int	newline;
 	int	i;
 
-	if (is_newline(cmd) == 0)
+	i = 1;
+	newline = 0;
+	while (is_newline(cmd->args[i]))
 	{
-		i = 2;
-		newline = 0;
-	}
-	else
-	{
-		i = 1;
+		i++;
 		newline = 1;
 	}
 	while (cmd->args[i])
@@ -59,7 +54,7 @@ void	ft_echo(t_cmd *cmd, t_shell *shell)
 			ft_putstr_fd(" ", cmd->fd_out);
 		i++;
 	}
-	if (newline == 1)
+	if (!newline)
 		ft_putstr_fd("\n", cmd->fd_out);
 	shell->ex_status = 0;
 }
