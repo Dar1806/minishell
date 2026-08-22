@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:38:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/22 19:37:30 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/22 23:39:49 by akkolitozer      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,11 @@ void	env_export(t_env **envl, char *envv);
 void	ft_exit(t_cmd *cmd, t_shell *shell);
 void	ft_echo(t_cmd *cmd, t_shell *shell);
 void	env_print(t_cmd *cmd, t_env **envl);
+void	ft_pwd(t_cmd *cmd, t_shell *shell);
 t_token	*lexer(char *line, t_shell *shell);
 void	ft_cd(t_cmd *cmd, t_shell *shell);
 void	close_all(int *pipes, int n_cmds);
 char	*get_envv(t_env *envl, char *key);
-void	ft_pwd(t_cmd *cmd, t_shell *shell);
 char	**env_list_to_array(t_env *envl);
 int		is_redir_type(t_token_type type);
 int		write_read(char *file, int mode);
