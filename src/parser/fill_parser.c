@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 17:37:35 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/21 19:12:10 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/22 16:57:34 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static void	append_to_arg(t_cmd *cmd, int i, char *value)
 	else
 	{
 		tmp = ft_strjoin(cmd->args[i], value);
-		// free(cmd->args[i]);
 		cmd->args[i] = tmp;
 	}
 }
@@ -72,8 +71,8 @@ static	int	handle_redir(t_cmd *cmd, t_token **token, int *parse_error)
 	int				fd;
 
 	if (nothing_after(token) == -1)
-		return (ft_putstr_fd("minishell : syntax error\n", 2),
-			*parse_error = 1, -1);
+		return (ft_putstr_fd("minishell : syntax error near "
+				"unexpected token `newline'\n", 2),*parse_error = 1, -1);
 	type = (*token)->type;
 	(*token) = (*token)->next;
 	if (type == TOKEN_REDIR_OUT || type == TOKEN_REDIR_APPEND)
@@ -83,7 +82,6 @@ static	int	handle_redir(t_cmd *cmd, t_token **token, int *parse_error)
 			fd = write_read(cmd->outfile, cmd->append + 1);
 			if (fd != -1)
 				close(fd);
-			// free(cmd->outfile);
 		}
 		cmd->outfile = ft_ft_strdup((*token)->value);
 		cmd->append = (type == TOKEN_REDIR_APPEND);

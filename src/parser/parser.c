@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 14:10:41 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/21 19:14:07 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/22 16:24:26 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	add_cmd(t_cmd **first, t_cmd **last, t_cmd *cmd)
 
 static int	syntax_error(t_shell *shell)
 {
-	ft_putstr_fd("minishell : syntax error\n", 2);
+	ft_putstr_fd("minishell : syntax error near unexpected token `|'\n", 2);
 	shell->ex_status = 2;
 	return (2);
 }

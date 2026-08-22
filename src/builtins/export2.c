@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 21:10:56 by akkolitozer       #+#    #+#             */
-/*   Updated: 2026/08/18 00:28:00 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/22 17:33:12 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	envl_sort(t_env **envl)
 	}
 }
 
-void	env_print(t_env **envl)
+void	env_print(t_cmd *cmd, t_env **envl)
 {
 	t_env	*tmp;
 	t_env	*head;
@@ -88,16 +88,16 @@ void	env_print(t_env **envl)
 	envl_sort(&tmp);
 	while (tmp)
 	{
-		ft_putstr_fd("export ", 1);
-		ft_putstr_fd(tmp->key, 1);
+		ft_putstr_fd("export ", cmd->fd_out);
+		ft_putstr_fd(tmp->key, cmd->fd_out);
 		if (tmp->value)
 		{
-			ft_putstr_fd("=\"", 1);
-			ft_putstr_fd(tmp->value, 1);
-			ft_putendl_fd("\"", 1);
+			ft_putstr_fd("=\"", cmd->fd_out);
+			ft_putstr_fd(tmp->value, cmd->fd_out);
+			ft_putendl_fd("\"", cmd->fd_out);
 		}
 		else
-			ft_putchar_fd('\n', 1);
+			ft_putchar_fd('\n', cmd->fd_out);
 		tmp = tmp->next;
 	}
 	env_free_nodes(head);

@@ -6,16 +6,17 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/16 16:57:14 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/16 17:36:32 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/22 17:24:13 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_pwd(t_shell *shell)
+void	ft_pwd(t_cmd *cmd, t_shell *shell)
 {
 	char	*pwd;
 
+	(void)cmd;
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
 	{
@@ -24,7 +25,7 @@ void	ft_pwd(t_shell *shell)
 		shell->ex_status = 1;
 		return ;
 	}
-	ft_putendl_fd(pwd, 1);
+	ft_putendl_fd(pwd, cmd->fd_out);
 	free(pwd);
 	shell->ex_status = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 15:17:03 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/21 23:04:23 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/22 17:15:18 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	write_read(char *file, int mode)
 	return (fd);
 }
 
-static int	set_stdin(t_cmd *cmd)
+int	set_stdin(t_cmd *cmd)
 {
 	int	fd;
 
@@ -61,7 +61,7 @@ static int	set_stdin(t_cmd *cmd)
 	return (0);
 }
 
-static int	set_stdout(t_cmd *cmd)
+int	set_stdout(t_cmd *cmd)
 {
 	int	fd;
 
@@ -100,6 +100,10 @@ void	run_child(t_cmd *cmd, t_shell *shell, int *pipes, int n_cmds)
 	if (code != -1)
 	{
 		exec_built_ins(cmd, shell, code);
+		close(STDIN_FILENO);
+		close(STDOUT_FILENO);
+		close(STDERR_FILENO);
+		env_free_list(shell->envl);
 		exit(shell->ex_status);
 	}
 	envl = env_list_to_array(shell->envl);

@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 14:46:22 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/16 18:59:22 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/22 17:31:42 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ void	ft_echo(t_cmd *cmd, t_shell *shell)
 	}
 	while (cmd->args[i])
 	{
-		ft_putstr_fd(cmd->args[i], 1);
+		ft_putstr_fd(cmd->args[i], cmd->fd_out);
 		if (cmd->args[i + 1])
-			ft_putstr_fd(" ", 1);
+			ft_putstr_fd(" ", cmd->fd_out);
 		i++;
 	}
 	if (newline == 1)
-		ft_putstr_fd("\n", 1);
+		ft_putstr_fd("\n", cmd->fd_out);
 	shell->ex_status = 0;
 }

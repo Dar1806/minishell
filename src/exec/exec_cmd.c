@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 15:44:08 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/21 23:07:06 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/22 16:11:13 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ static void	cmd_not_found(char *args, t_shell *shell)
 		ft_putstr_fd(args, 2);
 	ft_putstr_fd(": command not found\n", 2);
 	env_free_list(shell->envl);
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
+	close(STDERR_FILENO);
 	ft_free();
 	exit(127);
 }

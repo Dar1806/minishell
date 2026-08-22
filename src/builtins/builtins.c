@@ -3,14 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akkolitozer <akkolitozer@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 13:14:58 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/18 00:50:04 by akkolitozer      ###   ########.fr       */
+/*   Updated: 2026/08/22 17:34:34 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	set_stdin_fd(t_cmd *cmd)
+{
+	if (cmd->here_doc != NULL)
+	{
+		cmd->fd_in = exec_here_doc(cmd->here_doc);
+		if (cmd->fd_in == -1)
+			return (-1);
+	}
+	else if (cmd->infile)
+	{
+		cmd->fd_in = write_read(cmd->infile, 0);
+		if (cmd->fd_in == -1)
+			return (-1);
+	}
+	return (0);
+}
+
+int	set_stdout_fd(t_cmd *cmd)
+{
+	if (cmd->outfile)
+	{
+		if (cmd->append)
+			cmd->fd_out = write_read(cmd->outfile, 2);
+		else
+			cmd->fd_out = write_read(cmd->outfile, 1);
+		if (cmd->fd_out == -1)
+			return (-1);
+	}
+	return (0);
+}
+
+
 
 int	is_built_ins(char *args)
 {
@@ -34,18 +67,21 @@ int	is_built_ins(char *args)
 
 void	exec_built_ins(t_cmd *cmd, t_shell *shell, int code)
 {
+	if (set_stdout_fd(cmd) || set_stdin_fd(cmd))
+		exit(1);
 	if (code == 0)
 		ft_echo(cmd, shell);
 	if (code == 1)
 		ft_cd(cmd, shell);
 	if (code == 2)
-		ft_pwd(shell);
+		ft_pwd(cmd, shell);
 	if (code == 3)
 		ft_export(cmd, shell);
 	if (code == 4)
 		ft_unset(cmd, shell);
 	if (code == 5)
-		ft_env(shell->envl);
+		ft_env(cmd, shell->envl);
 	if (code == 6)
 		ft_exit(cmd, shell);
+	ft_free();
 }

@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 04:02:04 by akkolitozer       #+#    #+#             */
-/*   Updated: 2026/08/21 19:55:04 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/22 17:33:37 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	ft_export(t_cmd *cmd, t_shell *shell)
 	i = 0;
 	if (!args[i + 1])
 	{
-		env_print(&shell->envl);
+		env_print(cmd, &shell->envl);
 		shell->ex_status = 0;
 		return ;
 	}
