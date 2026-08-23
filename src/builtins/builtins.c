@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 13:14:58 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/22 19:21:54 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/23 17:21:42 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,20 +68,20 @@ int	is_built_ins(char *args)
 void	exec_built_ins(t_cmd *cmd, t_shell *shell, int code)
 {
 	if (set_stdout_fd(cmd) || set_stdin_fd(cmd))
-		exit(1);
-	if (code == 0)
+		shell->ex_status = 1;
+	else if (code == 0)
 		ft_echo(cmd, shell);
-	if (code == 1)
+	else if (code == 1)
 		ft_cd(cmd, shell);
-	if (code == 2)
+	else if (code == 2)
 		ft_pwd(cmd, shell);
-	if (code == 3)
+	else if (code == 3)
 		ft_export(cmd, shell);
-	if (code == 4)
+	else if (code == 4)
 		ft_unset(cmd, shell);
-	if (code == 5)
+	else if (code == 5)
 		ft_env(cmd, shell->envl);
-	if (code == 6)
+	else if (code == 6)
 		ft_exit(cmd, shell);
 	if (cmd->fd_in != 0)
 		close(cmd->fd_in);

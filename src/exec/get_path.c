@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 14:14:49 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/21 19:01:46 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/23 17:04:05 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char	*get_path(char *cmd_name, char **env)
 	{
 		if (access(cmd_name, F_OK | X_OK) == 0)
 			return (ft_ft_strjoin(cmd_name, ""));
-		return (NULL);
+		return (cmd_name);
 	}
 	env_path = ft_getenv(env);
 	if (!env_path)

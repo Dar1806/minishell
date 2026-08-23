@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 14:36:20 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/21 19:03:51 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/23 17:25:41 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,20 +82,20 @@ void	execution(t_cmd *cmd, t_shell *shell)
 
 	if (!cmd)
 		return ;
+	if (cmd->next != NULL)
+	{
+		pipe_exec(cmd, shell);
+		return ;
+	}
 	if (!cmd->args || !cmd->args[0])
 	{
 		if (cmd->infile || cmd->outfile)
 			simple_exec(cmd, shell);
 		return ;
 	}
-	if (cmd->next == NULL)
-	{
-		code = is_built_ins(cmd->args[0]);
-		if (code != -1)
-			exec_built_ins(cmd, shell, code);
-		else
-			simple_exec(cmd, shell);
-	}
+	code = is_built_ins(cmd->args[0]);
+	if (code != -1)
+		exec_built_ins(cmd, shell, code);
 	else
-		pipe_exec(cmd, shell);
+		simple_exec(cmd, shell);
 }

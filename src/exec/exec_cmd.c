@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 15:44:08 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/22 16:11:13 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/23 17:14:49 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,29 @@ static void	cmd_not_found(char *args, t_shell *shell)
 	exit(127);
 }
 
+static void	error_enoent(char *arg)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd(": No such file or directory\n", 2);
+	ft_free();
+	exit(127);
+}
+
+static void	error_eisdir(char *arg)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd(": Is a directory\n", 2);
+}
+
+static void	error_eacces_enoexec(char *arg)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd(": Permission denied\n", 2);
+}
+
 void	exec_cmd(t_cmd *cmd, char **env, t_shell *shell)
 {
 	char	*path;
@@ -36,18 +59,12 @@ void	exec_cmd(t_cmd *cmd, char **env, t_shell *shell)
 	if (!path)
 		cmd_not_found(cmd->args[0], shell);
 	execve(path, cmd->args, env);
+	if (errno == ENOENT)
+		error_enoent(cmd->args[0]);
 	if (errno == EISDIR)
-	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(cmd->args[0], 2);
-		ft_putstr_fd(": Is a directory\n", 2);
-	}
+		error_eisdir(cmd->args[0]);
 	else if (errno == EACCES || errno == ENOEXEC)
-	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(cmd->args[0], 2);
-		ft_putstr_fd(": Permission denied\n", 2);
-	}
+		error_eacces_enoexec(cmd->args[0]);
 	else
 		ft_putstr_fd("minishell: execve failed\n", 2);
 	ft_free();

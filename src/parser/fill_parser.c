@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 17:37:35 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/22 16:57:34 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/23 16:59:10 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	append_to_arg(t_cmd *cmd, int i, char *value)
 		cmd->args[i] = ft_ft_strdup(value);
 	else
 	{
-		tmp = ft_strjoin(cmd->args[i], value);
+		tmp = ft_ft_strjoin(cmd->args[i], value);
 		cmd->args[i] = tmp;
 	}
 }

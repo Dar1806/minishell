@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 21:10:56 by akkolitozer       #+#    #+#             */
-/*   Updated: 2026/08/22 18:42:15 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/23 17:36:59 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	env_print(t_cmd *cmd, t_env **envl)
 	{
 		ft_putstr_fd("export ", cmd->fd_out);
 		ft_putstr_fd(tmp->key, cmd->fd_out);
-		if (tmp->value && tmp->value[0])
+		if (tmp->value)
 		{
 			ft_putstr_fd("=\"", cmd->fd_out);
 			ft_putstr_fd(tmp->value, cmd->fd_out);
