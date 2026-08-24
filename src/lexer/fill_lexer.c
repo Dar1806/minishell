@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 14:52:09 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/24 16:15:30 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/24 18:26:47 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,12 @@ static void	choose_redir(t_token **tokens, char *line, int *i)
 static void	read_word(t_token **tokens, char *line, int *i, t_shell *shell)
 {
 	int		j;
+	int		k;
 	char	*str;
+	char	**splitwords;
 
 	j = (*i);
+	k = -1;
 	while (line[j] != ' ' && line[j] != '\t' && line[j] != '|'
 		&& line[j] != '<' && line[j] != '>' && line[j] != '\0'
 		&& line[j] != '\'' && line[j] != '"')
@@ -86,8 +89,9 @@ static void	read_word(t_token **tokens, char *line, int *i, t_shell *shell)
 	}
 	str = ft_ft_substr(line, (*i), j - *i);
 	expander(&str, shell);
-	if (str && str[0])
-		add_token(tokens, TOKEN_WORD, str);
+	splitwords = ft_ft_split(str, ' ');
+	while (splitwords[++k] && splitwords[k][0])
+		add_token(tokens, TOKEN_WORD, splitwords[k]);
 	(*i) = j;
 }
 

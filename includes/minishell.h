@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:38:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/24 16:33:22 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/24 18:08:46 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ typedef struct s_token
 {
 	int						joined;
 	char					*value;
-	struct s_token			*next;
 	t_token_type			type;
+	struct s_token			*next;
 }	t_token;
 
 /*STRUCT VARIABLE D'ENVIRONNEMENT*/
