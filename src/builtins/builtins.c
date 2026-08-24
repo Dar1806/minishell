@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/08 13:14:58 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/23 17:21:42 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/24 16:39:34 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,7 @@
 int	set_stdin_fd(t_cmd *cmd)
 {
 	cmd->fd_in = 0;
-	if (cmd->here_doc != NULL)
-	{
-		cmd->fd_in = exec_here_doc(cmd->here_doc);
-		if (cmd->fd_in == -1)
-			return (-1);
-	}
-	else if (cmd->infile)
+	if (cmd->infile)
 	{
 		cmd->fd_in = write_read(cmd->infile, 0);
 		if (cmd->fd_in == -1)

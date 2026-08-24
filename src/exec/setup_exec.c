@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 14:36:20 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/23 17:25:41 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/24 17:17:51 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	execution(t_cmd *cmd, t_shell *shell)
 	}
 	if (!cmd->args || !cmd->args[0])
 	{
-		if (cmd->infile || cmd->outfile)
+		if (cmd->infile || cmd->outfile || cmd->here_doc)
 			simple_exec(cmd, shell);
 		return ;
 	}

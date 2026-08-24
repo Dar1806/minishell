@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 15:25:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/22 19:22:57 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/24 17:15:07 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,7 @@
 
 void	handle_heredoc(t_cmd *cmd, t_token *token)
 {
-	int	fd;
-
-	if (cmd->here_doc)
-	{
-		fd = exec_here_doc(cmd->here_doc);
-		if (fd != -1)
-			close(fd);
-	}
+	free(cmd->here_doc);
 	cmd->here_doc = ft_ft_strdup(token->value);
 }
 
