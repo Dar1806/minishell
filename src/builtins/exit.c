@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/18 00:50:11 by akkolitozer       #+#    #+#             */
-/*   Updated: 2026/08/23 17:32:31 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/24 14:59:45 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	exit_clean(t_shell *shell, int exit_code)
 {
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
+	close(STDERR_FILENO);
 	env_free_list(shell->envl);
 	ft_free();
 	exit(exit_code);

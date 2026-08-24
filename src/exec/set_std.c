@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 15:17:03 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/22 19:27:16 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/24 15:00:07 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,6 @@ int	set_stdout(t_cmd *cmd)
 	return (0);
 }
 
-void	close_three_of_them(void)
-{
-	close(STDIN_FILENO);
-	close(STDOUT_FILENO);
-	close(STDERR_FILENO);
-}
-
 void	run_child(t_cmd *cmd, t_shell *shell, int *pipes, int n_cmds)
 {
 	int		out_err;
@@ -100,16 +93,14 @@ void	run_child(t_cmd *cmd, t_shell *shell, int *pipes, int n_cmds)
 	in_err = set_stdin(cmd);
 	out_err = set_stdout(cmd);
 	if (in_err || out_err)
-		exit(1);
+		exit_clean(shell, 1);
 	if (!cmd->args || !cmd->args[0])
-		exit(0);
+		exit_clean(shell, 0);
 	code = is_built_ins(cmd->args[0]);
 	if (code != -1)
 	{
 		exec_built_ins(cmd, shell, code);
-		close_three_of_them();
-		env_free_list(shell->envl);
-		exit(shell->ex_status);
+		exit_clean(shell, shell->ex_status);
 	}
 	envl = env_list_to_array(shell->envl);
 	exec_cmd(cmd, envl, shell);
