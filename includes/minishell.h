@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:38:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/24 18:08:46 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/25 14:10:56 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void	ft_pwd(t_cmd *cmd, t_shell *shell);
 t_token	*lexer(char *line, t_shell *shell);
 void	handle_sigint_while_child(int sig);
 void	ft_cd(t_cmd *cmd, t_shell *shell);
+int		wait_all(pid_t *pids, int n_cmds);
 void	close_all(int *pipes, int n_cmds);
 char	*get_envv(t_env *envl, char *key);
 char	**env_list_to_array(t_env *envl);

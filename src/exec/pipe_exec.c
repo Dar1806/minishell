@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 16:33:25 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/24 18:04:00 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/25 14:16:17 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,11 @@ int	*open_pipes(int n_cmds)
 	while (i < n_cmds - 1)
 	{
 		if (pipe(pipes + i * 2) == -1)
-			return (ft_putstr_fd("Error : pipe failed\n", 2), NULL);
+		{
+			ft_putstr_fd("Error : pipe failed\n", 2);
+			close_all(pipes, i + 1);
+			return (NULL);
+		}
 		i++;
 	}
 	return (pipes);
@@ -50,7 +54,7 @@ void	close_all(int *pipes, int n_cmds)
 		close(pipes[i++]);
 }
 
-static int	wait_all(pid_t *pids, int n_cmds)
+int	wait_all(pid_t *pids, int n_cmds)
 {
 	int	i;
 	int	status;

@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 14:36:20 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/24 17:17:51 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/25 18:03:58 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,15 @@ static int	*setup_pipes(int *pipes, int i, int n_cmds)
 	return (pipes);
 }
 
+void	fork_eror(t_shell *shell, pid_t *pids, int *pipes, int i, int n_cmds)
+{
+	ft_putstr_fd("Error : fork failed\n", 2);
+	close_all(pipes, n_cmds);
+	if (i > 0)
+		shell->ex_status = wait_all(pids, i);
+	sigint_setup();
+}
+
 void	pipe_exec(t_cmd *cmd, t_shell *shell)
 {
 	pid_t	*pids;
@@ -67,7 +76,7 @@ void	pipe_exec(t_cmd *cmd, t_shell *shell)
 	{
 		pids[i] = fork();
 		if (pids[i] == -1)
-			return (sigint_setup(), ft_putstr_fd("Error : fork failed\n", 2));
+			return (fork_eror(shell, pids, pipes, i, n_cmds));
 		if (pids[i] == 0)
 			run_child(cmd, shell, setup_pipes(pipes, i, n_cmds), n_cmds);
 		cmd = cmd->next;
