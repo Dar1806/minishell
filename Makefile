@@ -6,7 +6,7 @@
 #    By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 11:19:10 by nmeunier          #+#    #+#              #
-#    Updated: 2026/08/24 16:31:36 by nmeunier         ###   ########.fr        #
+#    Updated: 2026/08/26 17:47:41 by nmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ BOLD    = \033[1m
 
 all: $(NAME)
 
-$(NAME): banner_start $(OBJS)
+$(NAME):  $(OBJS)
 	@printf "$(YELLOW)Linking minishell...$(RESET)\n"
 	@$(CC) $(OBJS) $(RDFLAGS) -o $(NAME)
 	@printf "\n"
