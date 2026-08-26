@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 14:36:20 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/26 16:58:24 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/26 18:42:00 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	simple_exec(t_cmd *cmd, t_shell *shell)
 	pid_t				pid;
 	int					status;
 
+	status = 0;
 	sigint_ignore();
 	pid = fork();
 	if (pid == -1)
