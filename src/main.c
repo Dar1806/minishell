@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:47:21 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/22 19:35:27 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/26 17:41:46 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@ int	routine(t_shell *shell)
 
 	line = readline("minishell$ ");
 	if (!line)
-		return (0);
+		return (-1);
 	if (line[0])
 		add_history(line);
 	tokens = lexer(line, shell);
+	if (!tokens)
+		return (ft_free(), 0);
 	cmd = parser(tokens, shell);
 	execution(cmd, shell);
 	ft_free();
@@ -33,7 +35,7 @@ int	routine(t_shell *shell)
 		shell->ex_status = 130;
 		g_signal = 0;
 	}
-	return (1);
+	return (0);
 }
 
 int	main(int ac, char **av, char **env)
@@ -48,7 +50,7 @@ int	main(int ac, char **av, char **env)
 	shell.env = env;
 	shell.ex_status = 0;
 	while (1)
-		if (!routine(&shell))
+		if (routine(&shell))
 			break ;
 	env_free_list(shell.envl);
 	rl_clear_history();

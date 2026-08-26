@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 15:25:57 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/24 17:15:07 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/26 17:24:27 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	exec_here_doc(char *limiter)
 
 	if (pipe(fd) == -1)
 	{
-		ft_putstr_fd("Error : pipe failed\n", 2);
+		ft_putstr_fd("minishell : error : pipe failed\n", 2);
 		exit(1);
 	}
 	line = readline("> ");

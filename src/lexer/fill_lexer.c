@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 14:52:09 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/24 18:26:47 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/26 17:23:33 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	choose_redir(t_token **tokens, char *line, int *i)
 	(*i) = j;
 }
 
-static void	read_word(t_token **tokens, char *line, int *i, t_shell *shell)
+int	read_word(t_token **tokens, char *line, int *i, t_shell *shell)
 {
 	int		j;
 	int		k;
@@ -85,14 +85,17 @@ static void	read_word(t_token **tokens, char *line, int *i, t_shell *shell)
 	if (j == *i)
 	{
 		(*i)++;
-		return ;
+		return (-1);
 	}
 	str = ft_ft_substr(line, (*i), j - *i);
 	expander(&str, shell);
 	splitwords = ft_ft_split(str, ' ');
+	if (!splitwords)
+		return (-1);
 	while (splitwords[++k] && splitwords[k][0])
 		add_token(tokens, TOKEN_WORD, splitwords[k]);
 	(*i) = j;
+	return (0);
 }
 
 static int	handle_quote_token(t_token **token, char *l, int *i, t_shell *shell)
@@ -126,7 +129,8 @@ int	choose_tokens(t_token **tokens, char *line, int *i, t_shell *shell)
 		return (handle_quote_token(tokens, line, i, shell));
 	else
 	{
-		read_word(tokens, line, i, shell);
+		if (read_word(tokens, line, i, shell) == -1)
+			return (-1);
 		set_last_joined(*tokens, line, *i);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 16:33:25 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/25 14:16:17 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/26 17:24:37 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	*open_pipes(int n_cmds)
 	{
 		if (pipe(pipes + i * 2) == -1)
 		{
-			ft_putstr_fd("Error : pipe failed\n", 2);
+			ft_putstr_fd("minishell : error : pipe failed\n", 2);
 			close_all(pipes, i + 1);
 			return (NULL);
 		}

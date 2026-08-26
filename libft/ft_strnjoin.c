@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 01:33:16 by akkolitozer       #+#    #+#             */
-/*   Updated: 2026/08/22 19:21:08 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/26 17:20:28 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ char	*ft_ft_strnjoin(char const *s1, char const *s2, int n)
 	if (!s1 && !s2)
 		return (NULL);
 	len_s1 = ft_strlen(s1);
+	if (len_s1 == -1)
+		return (NULL);
 	new = ft_malloc((len_s1 + n + 1));
 	if (!new)
 		return (NULL);

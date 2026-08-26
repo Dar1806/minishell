@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 15:58:59 by hulescur          #+#    #+#             */
-/*   Updated: 2026/08/16 16:54:43 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/26 17:24:16 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	*ft_malloc(int size)
 		return (&head);
 	ptr = ft_newnode(&head, size);
 	if (!ptr)
-		return (ft_putendl_fd("malloc error", 2), NULL);
+		return (ft_putendl_fd("minishell : error : malloc failed", 2), NULL);
 	return (ptr);
 }
 
