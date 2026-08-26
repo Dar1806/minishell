@@ -6,13 +6,11 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/30 17:52:04 by hulescur          #+#    #+#             */
-/*   Updated: 2026/08/24 18:22:13 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/26 17:03:43 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-
 
 char	*get_var_key(char *word)
 {

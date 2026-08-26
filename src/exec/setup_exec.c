@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 14:36:20 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/25 18:03:58 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/26 16:58:24 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,41 +47,40 @@ static int	*setup_pipes(int *pipes, int i, int n_cmds)
 	return (pipes);
 }
 
-void	fork_eror(t_shell *shell, pid_t *pids, int *pipes, int i, int n_cmds)
+void	fork_error(t_shell *shell, pid_t *pids, int *pipes, int *var)
 {
 	ft_putstr_fd("Error : fork failed\n", 2);
-	close_all(pipes, n_cmds);
-	if (i > 0)
-		shell->ex_status = wait_all(pids, i);
+	close_all(pipes, var[1]);
+	if (var[0] > 0)
+		shell->ex_status = wait_all(pids, var[0]);
 	sigint_setup();
 }
 
 void	pipe_exec(t_cmd *cmd, t_shell *shell)
 {
 	pid_t	*pids;
-	int		n_cmds;
 	int		*pipes;
-	int		i;
+	int		var[2];
 
-	n_cmds = count_cmds(cmd);
-	pids = ft_malloc(sizeof(pid_t) * n_cmds);
+	var[1] = count_cmds(cmd);
+	pids = ft_malloc(sizeof(pid_t) * var[1]);
 	if (!pids)
 		return ;
-	pipes = open_pipes(n_cmds);
+	pipes = open_pipes(var[1]);
 	if (!pipes)
 		return ;
-	i = -1;
+	var[0] = -1;
 	sigint_ignore();
-	while (++i < n_cmds)
+	while (++var[0] < var[1])
 	{
-		pids[i] = fork();
-		if (pids[i] == -1)
-			return (fork_eror(shell, pids, pipes, i, n_cmds));
-		if (pids[i] == 0)
-			run_child(cmd, shell, setup_pipes(pipes, i, n_cmds), n_cmds);
+		pids[var[0]] = fork();
+		if (pids[var[0]] == -1)
+			return (fork_error(shell, pids, pipes, var));
+		if (pids[var[0]] == 0)
+			run_child(cmd, shell, setup_pipes(pipes, var[0], var[1]), var[1]);
 		cmd = cmd->next;
 	}
-	shell->ex_status = clean_all(pids, pipes, n_cmds);
+	shell->ex_status = clean_all(pids, pipes, var[1]);
 	sigint_setup();
 }
 
