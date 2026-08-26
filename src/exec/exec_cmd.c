@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 15:44:08 by nmeunier          #+#    #+#             */
-/*   Updated: 2026/08/24 16:26:14 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/08/26 18:54:54 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ void	exec_cmd(t_cmd *cmd, char **env, t_shell *shell)
 	else
 		ft_putstr_fd("minishell: execve failed\n", 2);
 	ft_free();
+	env_free_list(shell->envl);
 	exit(126);
 }
